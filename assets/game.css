@@ -1,0 +1,153 @@
+/* Wonder Train game styles — extracted from adi_feldman.html for parallel development. */
+/* ---------- GAME (board-game world) ---------- */
+  #game section{position:relative}
+  .game-setup{margin-top:46px;text-align:center}
+  .game-h3{font-family:'Frank Ruhl Libre',serif;font-size:1.5rem;margin-bottom:24px;color:var(--ink)}
+
+  /* character picker */
+  .char-picker{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;max-width:620px;margin:0 auto}
+  .char-card{
+    width:128px;border:3px solid transparent;border-radius:22px;padding:20px 10px;cursor:pointer;
+    background:var(--white);box-shadow:0 10px 24px var(--shadow);font-family:inherit;
+    display:flex;flex-direction:column;align-items:center;gap:8px;transition:.25s;
+  }
+  .char-card:hover{transform:translateY(-5px)}
+  .char-card.sel{border-color:var(--accent);background:#FFF7EC;transform:translateY(-5px)}
+  .char-card .char-face{font-size:3rem;filter:drop-shadow(0 4px 6px rgba(0,0,0,.18))}
+  .char-card .char-name{font-weight:700;color:var(--ink)}
+
+  .level-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:920px;margin:0 auto}
+  .level-card{
+    border:3px solid transparent;border-radius:26px;padding:34px 22px;cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;gap:10px;font-family:inherit;text-align:center;
+    color:#fff;position:relative;transition:transform .3s,box-shadow .3s,border-color .2s;
+  }
+  .lc-1{background:linear-gradient(150deg,#7BC97F,#52A86A);box-shadow:0 12px 0 #3d8052,0 22px 34px rgba(61,128,82,.4)}
+  .lc-2{background:linear-gradient(150deg,#F0A85D,#E07B3E);box-shadow:0 12px 0 #b85e28,0 22px 34px rgba(184,94,40,.4)}
+  .lc-3{background:linear-gradient(150deg,#8C9EE8,#6171C9);box-shadow:0 12px 0 #4a56a0,0 22px 34px rgba(74,86,160,.4)}
+  .level-card:hover{transform:translateY(-6px)}
+  .level-card.sel{border-color:#fff;outline:3px solid var(--accent)}
+  .level-card:active{transform:translateY(6px)}
+  .lvl-emoji{font-size:3rem;filter:drop-shadow(0 4px 6px rgba(0,0,0,.2))}
+  .lvl-title{font-family:'Frank Ruhl Libre',serif;font-size:1.7rem;font-weight:700}
+  .lvl-age{font-weight:800;font-size:1.15rem;background:rgba(255,255,255,.25);padding:3px 16px;border-radius:20px}
+  .lvl-desc{font-size:.98rem;line-height:1.5;opacity:.95}
+  .setup-hint{margin-top:30px;color:var(--ink-soft);font-weight:600}
+
+  .game-board-wrap{margin-top:36px;max-width:1000px;margin-inline:auto}
+  .game-topbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-bottom:22px}
+  .btn-sm{padding:9px 18px;font-size:.92rem}
+  .progress-pill{background:var(--white);padding:9px 20px;border-radius:30px;font-weight:800;color:var(--ink);box-shadow:0 6px 16px var(--shadow)}
+  .progress-pill span{color:var(--accent-deep)}
+  .lvl-pill{background:var(--accent);color:var(--white);padding:9px 20px;border-radius:30px;font-weight:700;font-size:.92rem}
+
+  /* MAP viewport — the board */
+  .map-viewport{
+    height:560px;overflow:hidden;border-radius:28px;position:relative;
+    background:
+      radial-gradient(circle at 20% 12%,rgba(255,255,255,.5),transparent 40%),
+      linear-gradient(170deg,#BFE3F2 0%,#CFE9D6 32%,#F4E7C7 64%,#F3D9B0 100%);
+    box-shadow:0 22px 50px rgba(120,86,50,.3),inset 0 0 60px rgba(255,255,255,.3);
+    border:5px solid #fff;
+  }
+  .map-world{position:absolute;top:0;left:0;width:100%;height:1700px;transition:transform 1.1s cubic-bezier(.4,.1,.2,1)}
+  .map-rail{position:absolute;top:0;left:0;width:100%;height:1700px;z-index:1}
+
+  .stations-layer{position:absolute;top:0;left:0;width:100%;height:1700px;z-index:2}
+  .station{
+    position:absolute;width:128px;transform:translate(-50%,-50%);text-align:center;
+  }
+  .station .st-pin{
+    width:96px;height:96px;border-radius:50% 50% 50% 8px;margin:0 auto;
+    display:flex;align-items:center;justify-content:center;font-size:2.6rem;
+    box-shadow:0 10px 0 rgba(0,0,0,.14),0 16px 22px rgba(0,0,0,.22);
+    border:4px solid rgba(255,255,255,.85);transform:rotate(-45deg);position:relative;transition:.4s;
+  }
+  .station .st-pin > span{transform:rotate(45deg)}
+  .station.cur .st-pin{transform:rotate(-45deg) scale(1.12);animation:stnPulse 1.4s ease-in-out infinite}
+  @keyframes stnPulse{0%,100%{box-shadow:0 10px 0 rgba(0,0,0,.14),0 16px 22px rgba(0,0,0,.22),0 0 0 0 rgba(255,211,107,.7)}50%{box-shadow:0 10px 0 rgba(0,0,0,.14),0 16px 22px rgba(0,0,0,.22),0 0 0 16px rgba(255,211,107,0)}}
+  .station.done .st-pin{filter:saturate(.7) brightness(1.04)}
+  .station.done .st-pin::after{content:'✓';position:absolute;bottom:-6px;right:-6px;transform:rotate(45deg);background:#6FBE7D;color:#fff;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;border:2px solid #fff;box-shadow:0 2px 5px rgba(0,0,0,.2)}
+  .station .st-label{
+    margin-top:14px;font-weight:700;font-size:.82rem;color:var(--ink);
+    background:rgba(255,255,255,.85);border-radius:12px;padding:3px 8px;display:inline-block;
+    box-shadow:0 3px 8px rgba(0,0,0,.1);line-height:1.25;
+  }
+  .station .st-num{
+    position:absolute;top:-10px;left:50%;transform:translateX(-50%);
+    background:var(--ink);color:#fff;font-size:.72rem;font-weight:800;
+    width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    border:2px solid #fff;z-index:3;
+  }
+
+  .player-token{
+    position:absolute;font-size:2.4rem;z-index:6;transform:translate(-50%,-110%);
+    transition:top 1s cubic-bezier(.34,1.3,.5,1),left 1s cubic-bezier(.34,1.3,.5,1);
+    filter:drop-shadow(0 6px 5px rgba(0,0,0,.35));pointer-events:none;
+  }
+  .player-token.hop{animation:tokHop .9s ease}
+  @keyframes tokHop{0%{transform:translate(-50%,-110%) scale(1)}45%{transform:translate(-50%,-200%) scale(1.25) rotate(-8deg)}100%{transform:translate(-50%,-110%) scale(1)}}
+
+  /* station banner */
+  .station-banner{
+    display:flex;align-items:center;gap:16px;justify-content:center;
+    background:var(--white);border-radius:20px;padding:14px 26px;margin:0 auto 18px;max-width:520px;
+    box-shadow:0 10px 26px var(--shadow);border-top:5px solid var(--accent);
+  }
+  .station-banner .sb-emoji{font-size:2.4rem}
+  .station-banner .sb-text{display:flex;flex-direction:column;text-align:right}
+  .station-banner .sb-num{font-family:'Heebo',sans-serif;font-weight:700;letter-spacing:1px;color:var(--accent-deep);font-size:.8rem}
+  .station-banner .sb-name{font-family:'Frank Ruhl Libre',serif;font-weight:700;font-size:1.4rem;color:var(--ink)}
+
+  /* question card */
+  .question-card{
+    background:var(--white);border-radius:26px;padding:38px 40px;
+    box-shadow:0 18px 40px var(--shadow);text-align:center;
+    border:none;border-top:6px solid var(--accent);position:relative;
+  }
+  .q-text{font-family:'Frank Ruhl Libre',serif;font-size:1.7rem;line-height:1.45;color:var(--ink);min-height:70px;display:flex;align-items:center;justify-content:center}
+  .q-hint{
+    background:var(--cream);border-radius:16px;padding:0 22px;margin:0 auto;max-width:560px;
+    max-height:0;overflow:hidden;transition:.4s;color:var(--ink-soft);font-size:1.05rem;
+  }
+  .q-hint.show{max-height:220px;padding:18px 22px;margin-top:18px}
+
+  /* DICE */
+  .dice-zone{height:130px;display:flex;align-items:center;justify-content:center;margin:24px 0 6px;perspective:600px}
+  .dice{width:78px;height:78px;position:relative;transform-style:preserve-3d;transition:transform 1.1s cubic-bezier(.3,.9,.4,1.1);transform:rotateX(-20deg) rotateY(20deg)}
+  .dice.rolling{animation:rollSpin 1.05s ease-out}
+  @keyframes rollSpin{0%{transform:rotateX(0) rotateY(0)}100%{transform:rotateX(720deg) rotateY(1080deg)}}
+  .dice .face{position:absolute;width:78px;height:78px;background:linear-gradient(150deg,#fff,#ffe9c7);border-radius:16px;border:2px solid #f0d6a8;display:grid;padding:12px;gap:4px;box-shadow:inset 0 0 12px rgba(201,130,31,.15)}
+  .dice .face span{width:14px;height:14px;border-radius:50%;align-self:center;justify-self:center;background:radial-gradient(circle at 35% 30%,#F4A93C,#C9821F);box-shadow:0 1px 2px rgba(0,0,0,.25)}
+  .f1{transform:translateZ(39px);grid-template-areas:'. . .' '. a .' '. . .'}
+  .f1 span{grid-area:a}
+  .f2{transform:rotateY(180deg) translateZ(39px);grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr)}
+  .f2 span:nth-child(1){grid-column:1;grid-row:1}.f2 span:nth-child(2){grid-column:3;grid-row:3}
+  .f3{transform:rotateY(90deg) translateZ(39px);grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr)}
+  .f3 span:nth-child(1){grid-column:1;grid-row:1}.f3 span:nth-child(2){grid-column:2;grid-row:2}.f3 span:nth-child(3){grid-column:3;grid-row:3}
+  .f4{transform:rotateY(-90deg) translateZ(39px);grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr)}
+  .f4 span:nth-child(1){grid-column:1;grid-row:1}.f4 span:nth-child(2){grid-column:3;grid-row:1}.f4 span:nth-child(3){grid-column:1;grid-row:3}.f4 span:nth-child(4){grid-column:3;grid-row:3}
+  .f5{transform:rotateX(90deg) translateZ(39px);grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr)}
+  .f5 span:nth-child(1){grid-column:1;grid-row:1}.f5 span:nth-child(2){grid-column:3;grid-row:1}.f5 span:nth-child(3){grid-column:2;grid-row:2}.f5 span:nth-child(4){grid-column:1;grid-row:3}.f5 span:nth-child(5){grid-column:3;grid-row:3}
+  .f6{transform:rotateX(-90deg) translateZ(39px);grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(3,1fr)}
+
+  .btn-roll{font-size:1.1rem;padding:15px 34px;box-shadow:0 8px 0 var(--accent-deep),0 14px 22px rgba(176,123,79,.4)}
+  .btn-roll:hover{transform:translateY(-2px)}
+  .btn-roll:active{transform:translateY(6px);box-shadow:0 3px 0 var(--accent-deep)}
+  .btn-roll:disabled{opacity:.55;cursor:not-allowed;transform:none}
+  .q-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+
+  /* confetti */
+  .confetti{position:fixed;top:-20px;width:12px;height:12px;z-index:9999;border-radius:2px;pointer-events:none;animation:fall linear forwards}
+  @keyframes fall{to{transform:translateY(105vh) rotate(720deg);opacity:.9}}
+
+  .win-screen{text-align:center;background:var(--white);border-radius:26px;padding:56px 40px;box-shadow:0 18px 40px var(--shadow);margin-top:10px}
+  .win-emoji{font-size:4.5rem;margin-bottom:16px;animation:tokHop 1.6s ease-in-out infinite}
+  .win-screen h3{font-family:'Frank Ruhl Libre',serif;font-size:2.1rem;color:var(--accent-deep);margin-bottom:12px}
+  .win-screen p{color:var(--ink-soft);margin-bottom:26px;font-size:1.1rem}
+  .win-screen .btn{margin:0 6px}
+
+  .game-note{
+    max-width:760px;margin:40px auto 0;text-align:center;background:var(--cream-deep);
+    padding:22px 28px;border-radius:18px;color:var(--ink-soft);font-size:1.02rem;line-height:1.6;
+  }
