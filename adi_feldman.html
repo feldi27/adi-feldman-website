@@ -414,6 +414,28 @@
     .question-card{padding:30px 22px}
     .q-text{font-size:1.3rem}
   }
+
+  /* ---------- CUSTOM SVG ICONS (outline) ---------- */
+  .ic{width:1em;height:1em;display:inline-block;vertical-align:middle;flex:none}
+  .card .ico{color:var(--accent-deep)}
+  .moment .m-emoji{color:var(--accent-deep)}
+  .moment-detail h3 .ic{color:var(--accent-deep)}
+  .contact-line .c-ico{color:var(--accent-deep);font-size:1.5rem}
+  .station-banner .sb-emoji{color:var(--accent-deep)}
+  .char-card .char-face{color:var(--accent-deep)}
+  .level-card .lvl-emoji{color:#fff}
+  .station .st-pin{color:#fff}
+  .book-cover .heart{color:#fff}
+  .win-emoji{color:var(--accent-deep);animation-name:winBob}
+  @keyframes winBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+  .player-token{
+    width:46px;height:46px;font-size:1.55rem;background:var(--white);
+    border-radius:50% 50% 50% 8px;display:flex;align-items:center;justify-content:center;
+    color:var(--accent-deep);border:3px solid #fff;box-shadow:0 8px 16px rgba(0,0,0,.32);
+  }
+  #rollBtn,#hintBtn{display:inline-flex;align-items:center;gap:9px}
+  .game-note{display:inline-flex;align-items:center;gap:9px}
+  .form-msg .ic,.game-note .ic{color:var(--accent);margin-inline-end:6px}
 </style>
 </head>
 <body>
@@ -488,22 +510,22 @@
       <p class="lead">אבחון, טיפול וליווי בהתפתחות השפה והתקשורת — מתוך הקשבה עמוקה למה שקורה מתחת לפני השטח, ולא רק לסימפטום.</p>
       <div class="cards">
         <div class="card">
-          <div class="ico">🗣️</div>
+          <div class="ico" data-icon="talk"></div>
           <h3>התפתחות שפה ודיבור</h3>
           <p>ליווי ילדים בהתפתחות אוצר מילים, הגייה, משפטים ויכולת ההבעה — בקצב הטבעי שלהם.</p>
         </div>
         <div class="card">
-          <div class="ico">👂</div>
+          <div class="ico" data-icon="ear"></div>
           <h3>תקשורת והבנה</h3>
           <p>חיזוק היכולת להבין, להקשיב ולהתחבר — הבסיס לכל אינטראקציה משמעותית.</p>
         </div>
         <div class="card">
-          <div class="ico">🧩</div>
+          <div class="ico" data-icon="puzzle"></div>
           <h3>אבחון מותאם</h3>
           <p>הסתכלות רחבה על הילד ועל הקשר המשפחתי, ובניית תכנית התערבות אישית ומדויקת.</p>
         </div>
         <div class="card">
-          <div class="ico">🌱</div>
+          <div class="ico" data-icon="sprout"></div>
           <h3>התפתחות בריאה</h3>
           <p>יצירת תנאים שבהם הילד מרגיש בטוח ומובן — ומשם נפתחת הדלת להתפתחות טבעית.</p>
         </div>
@@ -525,12 +547,12 @@
         </div>
         <div class="cards" style="grid-template-columns:1fr;margin-top:0">
           <div class="card">
-            <div class="ico">💛</div>
+            <div class="ico" data-icon="heart"></div>
             <h3>קשר לפני הכל</h3>
             <p>שפה, רגש וקשר שזורים זה בזה. אנחנו מתחילים מהחיבור.</p>
           </div>
           <div class="card">
-            <div class="ico">🏡</div>
+            <div class="ico" data-icon="home"></div>
             <h3>מתוך הבית</h3>
             <p>כלים שמשתלבים בשגרה שלכם, בלי להוסיף עומס ללו"ז.</p>
           </div>
@@ -590,40 +612,40 @@
       <div id="gameSetup" class="game-setup">
         <h3 class="game-h3">1 · בחרו דמות</h3>
         <div class="char-picker" id="charPicker">
-          <button class="char-card" data-char="🦊" data-name="שועלי"><span class="char-face">🦊</span><span class="char-name">שועלי</span></button>
-          <button class="char-card" data-char="🐰" data-name="ארנבון"><span class="char-face">🐰</span><span class="char-name">ארנבון</span></button>
-          <button class="char-card" data-char="🦉" data-name="ינשופי"><span class="char-face">🦉</span><span class="char-name">ינשופי</span></button>
-          <button class="char-card" data-char="🐻" data-name="דובוני"><span class="char-face">🐻</span><span class="char-name">דובוני</span></button>
+          <button class="char-card" data-char="fox" data-name="שועלי"><span class="char-face" data-icon="fox"></span><span class="char-name">שועלי</span></button>
+          <button class="char-card" data-char="rabbit" data-name="ארנבון"><span class="char-face" data-icon="rabbit"></span><span class="char-name">ארנבון</span></button>
+          <button class="char-card" data-char="owl" data-name="ינשופי"><span class="char-face" data-icon="owl"></span><span class="char-name">ינשופי</span></button>
+          <button class="char-card" data-char="bear" data-name="דובוני"><span class="char-face" data-icon="bear"></span><span class="char-name">דובוני</span></button>
         </div>
 
         <h3 class="game-h3" style="margin-top:44px">2 · בחרו רמת גיל</h3>
         <div class="level-cards">
           <button class="level-card lc-1" data-level="1">
-            <span class="lvl-emoji">🌱</span>
+            <span class="lvl-emoji" data-icon="seedling"></span>
             <span class="lvl-title">רמה 1</span>
             <span class="lvl-age">גילאי 4–6</span>
             <span class="lvl-desc">שאלות "למה" מהעולם הקרוב והמוכר</span>
           </button>
           <button class="level-card lc-2" data-level="2">
-            <span class="lvl-emoji">🌿</span>
+            <span class="lvl-emoji" data-icon="sprout"></span>
             <span class="lvl-title">רמה 2</span>
             <span class="lvl-age">גילאי 7–9</span>
             <span class="lvl-desc">חוקים, סיבה ותוצאה, והעולם הרחב</span>
           </button>
           <button class="level-card lc-3" data-level="3">
-            <span class="lvl-emoji">🌳</span>
+            <span class="lvl-emoji" data-icon="tree"></span>
             <span class="lvl-title">רמה 3</span>
             <span class="lvl-age">גילאי 10–12</span>
             <span class="lvl-desc">חשיבה מורכבת, "מה היה קורה אילו", וטיעון</span>
           </button>
         </div>
-        <p class="setup-hint" id="setupHint">בחרו דמות ורמה כדי להתחיל את ההרפתקה ✨</p>
+        <p class="setup-hint" id="setupHint">בחרו דמות ורמה כדי להתחיל את ההרפתקה</p>
       </div>
 
       <!-- board -->
       <div id="gameBoard" class="game-board-wrap" style="display:none">
         <div class="game-topbar">
-          <button class="btn btn-ghost btn-sm" onclick="resetGame()">↩ מסך פתיחה</button>
+          <button class="btn btn-ghost btn-sm" onclick="resetGame()"><span data-icon="back"></span> מסך פתיחה</button>
           <div class="progress-pill">תחנה <span id="curStation">0</span> / 20</div>
           <div class="lvl-pill" id="lvlPill">רמה 1 · גילאי 4–6</div>
         </div>
@@ -633,13 +655,13 @@
           <div class="map-world" id="mapWorld">
             <svg class="map-rail" id="mapRail" viewBox="0 0 1000 1700" preserveAspectRatio="xMidYMin meet"></svg>
             <div class="stations-layer" id="stationsLayer"></div>
-            <div class="player-token" id="playerToken">🦊</div>
+            <div class="player-token" id="playerToken" data-icon="fox"></div>
           </div>
         </div>
 
         <div class="game-main">
           <div class="station-banner" id="stationBanner">
-            <span class="sb-emoji" id="sbEmoji">🏡</span>
+            <span class="sb-emoji" id="sbEmoji" data-icon="flag"></span>
             <div class="sb-text"><span class="sb-num" id="sbNum">תחנה 1</span><span class="sb-name" id="sbName">תחנת הזינוק</span></div>
           </div>
 
@@ -660,22 +682,22 @@
             </div>
 
             <div class="q-actions">
-              <button class="btn btn-ghost btn-sm" id="hintBtn" onclick="toggleHint()" style="display:none">💡 רמז לדיון</button>
-              <button class="btn btn-primary btn-roll" id="rollBtn" onclick="rollDice()">🎲 גלגלו את הקובייה</button>
+              <button class="btn btn-ghost btn-sm" id="hintBtn" onclick="toggleHint()" style="display:none"><span data-icon="bulb"></span><span>רמז לדיון</span></button>
+              <button class="btn btn-primary btn-roll" id="rollBtn" onclick="rollDice()"><span data-icon="dice"></span><span class="rl">גלגלו את הקובייה</span></button>
             </div>
           </div>
         </div>
 
         <div id="winScreen" class="win-screen" style="display:none">
-          <div class="win-emoji">🏆</div>
+          <div class="win-emoji" data-icon="trophy"></div>
           <h3>כל הכבוד! הגעתם לארמון הסיום!</h3>
           <p>סיימתם מסע מלא חשיבה דרך כל 20 התחנות. אפשר לצאת להרפתקה חדשה.</p>
-          <button class="btn btn-primary" onclick="restartSameLevel()">סיבוב נוסף 🔄</button>
+          <button class="btn btn-primary" onclick="restartSameLevel()">סיבוב נוסף <span data-icon="refresh"></span></button>
           <button class="btn btn-ghost" onclick="resetGame()">מסע אחר</button>
         </div>
       </div>
 
-      <p class="game-note">💛 טיפ להורים ולמטפלים: אין תשובה אחת נכונה. המטרה היא לעודד את הילד לחשוב בקול, להסביר ולנמק. אפשר להיעזר ברמז לדיון כדי להעמיק את השיחה.</p>
+      <p class="game-note"><span data-icon="heart"></span><span>טיפ להורים ולמטפלים: אין תשובה אחת נכונה. המטרה היא לעודד את הילד לחשוב בקול, להסביר ולנמק. אפשר להיעזר ברמז לדיון כדי להעמיק את השיחה.</span></p>
     </section>
   </div>
 
@@ -686,7 +708,7 @@
       <h2 class="section-title">איפה מתחבאות הנשיקות?</h2>
       <div class="book-wrap" style="margin-top:40px">
         <div class="book-cover">
-          <div class="heart">💋</div>
+          <div class="heart" data-icon="heart"></div>
           <h3>איפה מתחבאות הנשיקות?</h3>
           <div class="author">מאת עדי פלדמן</div>
         </div>
@@ -710,9 +732,9 @@
       <p class="lead">לכל שאלה, קביעת פגישה או פרטים על הסדנאות — אני כאן. מלאו את הפרטים ואחזור אליכם בהקדם.</p>
       <div class="contact-grid" style="margin-top:44px">
         <div class="contact-info">
-          <div class="contact-line"><span class="c-ico">📍</span><div><strong>קליניקה</strong><br>כרכור והסביבה</div></div>
-          <div class="contact-line"><span class="c-ico">📞</span><div><strong>טלפון</strong><br>הזינו פרטים ואחזור אליכם</div></div>
-          <div class="contact-line"><span class="c-ico">✉️</span><div><strong>אימייל</strong><br>דרך הטופס לצד</div></div>
+          <div class="contact-line"><span class="c-ico" data-icon="pin"></span><div><strong>קליניקה</strong><br>כרכור והסביבה</div></div>
+          <div class="contact-line"><span class="c-ico" data-icon="phone"></span><div><strong>טלפון</strong><br>הזינו פרטים ואחזור אליכם</div></div>
+          <div class="contact-line"><span class="c-ico" data-icon="mail"></span><div><strong>אימייל</strong><br>דרך הטופס לצד</div></div>
           <div class="quote-card" style="margin-top:30px">אני כאן כדי ללוות אתכם, צעד אחר צעד, בשפה וברגש.</div>
         </div>
         <form onsubmit="return submitForm(event)">
@@ -729,7 +751,7 @@
             <textarea id="message" placeholder="במה אפשר לעזור?"></textarea>
           </div>
           <button type="submit" class="btn btn-primary" style="width:100%">שליחה</button>
-          <div class="form-msg" id="formMsg">תודה! ההודעה נשלחה, אחזור אליך בהקדם 💛</div>
+          <div class="form-msg" id="formMsg"><span data-icon="heart"></span>תודה! ההודעה נשלחה, אחזור אליך בהקדם</div>
         </form>
       </div>
     </section>
@@ -758,64 +780,120 @@
 </footer>
 
 <script>
+  /* ---- custom outline icon set ---- */
+  const ICONS = {
+    talk:'<path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.6L3 21l1.9-5.6A8.5 8.5 0 1 1 21 11.5Z"/><path d="M8.5 11h7M8.5 14h4"/>',
+    ear:'<path d="M7 11a5 5 0 1 1 8.7 3.4c-1 1-1.5 1.6-1.7 2.7A2.6 2.6 0 0 1 10.4 19"/><path d="M9.5 11a2.5 2.5 0 0 1 4.8-1"/>',
+    puzzle:'<path d="M9.5 4.2a2 2 0 0 1 4 0c0 .9 1.1 1.3 1.7.7.4-.4 1-.4 1.4 0l1.2 1.2c.4.4.4 1 0 1.4-.6.6-.2 1.7.7 1.7a2 2 0 0 1 0 4c-.9 0-1.3 1.1-.7 1.7.4.4.4 1 0 1.4l-1.2 1.2c-.4.4-1 .4-1.4 0-.6-.6-1.7-.2-1.7.7a2 2 0 0 1-4 0c0-.9-1.1-1.3-1.7-.7-.4.4-1 .4-1.4 0l-1.2-1.2c-.4-.4-.4-1 0-1.4.6-.6.2-1.7-.7-1.7a2 2 0 0 1 0-4c.9 0 1.3-1.1.7-1.7-.4-.4-.4-1 0-1.4L4.4 4.9c.4-.4 1-.4 1.4 0 .6.6 1.7.2 1.7-.7Z"/>',
+    sprout:'<path d="M12 21v-8"/><path d="M12 13C12 9 9.5 7 5 7c0 4 2.5 6 7 6Z"/><path d="M12 14c0-3.2 2.2-5 6.5-5 0 3.2-2.2 5-6.5 5Z"/>',
+    heart:'<path d="M12 20.3 4.7 13a4.5 4.5 0 0 1 6.4-6.3l.9.9.9-.9A4.5 4.5 0 1 1 19.3 13Z"/>',
+    home:'<path d="M4 11 12 4l8 7"/><path d="M6 9.5V19h12V9.5"/><path d="M10 19v-5h4v5"/>',
+    bath:'<path d="M4 12h16"/><path d="M5 12v3a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3v-3"/><path d="M7 12V7.5A2.5 2.5 0 0 1 11.5 6"/><path d="M11.5 7.5h.01"/><path d="M7 18l-1 2M17 18l1 2"/>',
+    kitchen:'<circle cx="10" cy="13" r="6"/><path d="M16 13h6"/><path d="M9 5c0 1 1.5 1 1.5 2M12.5 5c0 1 1.5 1 1.5 2"/>',
+    drive:'<path d="M4 13l1.4-4.2A2 2 0 0 1 7.3 7.4h9.4a2 2 0 0 1 1.9 1.4L20 13"/><path d="M4 13h16v3a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-1H7v1a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Z"/><path d="M7 13.5h.01M17 13.5h.01"/>',
+    shirt:'<path d="M8.5 4 5 6 3 9.5 5.5 11 7 9.2V20h10V9.2L18.5 11 21 9.5 19 6l-3.5-2a3.5 3.5 0 0 1-7 0Z"/>',
+    mountain:'<path d="M3 19h18"/><path d="m6 19 4.5-9 3 5.5 2-3L20 19"/><circle cx="16.5" cy="6.5" r="2"/>',
+    tidy:'<path d="M4.5 9h15l-1.3 9.4a1.5 1.5 0 0 1-1.5 1.3H7.3a1.5 1.5 0 0 1-1.5-1.3Z"/><path d="M3.5 9h17"/><path d="M9.5 9 11 4M14.5 9 13 4"/>',
+    moon:'<path d="M20 13.5A8 8 0 1 1 10.5 4a6.5 6.5 0 0 0 9.5 9.5Z"/>',
+    story:'<path d="M12 6.5C10.3 5.2 7.8 4.5 5 4.5V18c2.8 0 5.3.7 7 2 1.7-1.3 4.2-2 7-2V4.5c-2.8 0-5.3.7-7 2Z"/><path d="M12 6.5V20"/>',
+    art:'<path d="M12 3.5a8.5 8.5 0 1 0 0 17c1 0 1.6-.9 1.4-1.8-.2-1 .5-1.9 1.5-1.9H17a3 3 0 0 0 3-3c0-4.7-3.7-8.3-8-8.3Z"/><circle cx="8" cy="9.5" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16" cy="10" r="1"/>',
+    garden:'<circle cx="12" cy="8" r="2.5"/><path d="M12 5.5V3M12 10.5V21M9.5 8H6.5M17.5 8h-3M10.2 6.2 8 4M16 4l-2.2 2.2M10.2 9.8 8 12M16 12l-2.2-2.2"/><path d="M12 21c-2 0-3.5-1.2-4-3 2 0 3.5 1 4 3Z"/>',
+    shopping:'<circle cx="9.5" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/><path d="M3 4h2.2l2 11a1.5 1.5 0 0 0 1.5 1.2h7.8a1.5 1.5 0 0 0 1.5-1.2L20 8H6.2"/>',
+    pin:'<path d="M12 21s7-5.5 7-11A7 7 0 0 0 5 10c0 5.5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/>',
+    phone:'<path d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 5 5l1.5-2 4 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 4.5 5.5a2 2 0 0 1 2-2Z"/>',
+    mail:'<rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="m4 7 8 6 8-6"/>',
+    fox:'<path d="M4 4c2.2 1 3.8 2.8 4.6 5M20 4c-2.2 1-3.8 2.8-4.6 5"/><path d="M5 9c0 5.5 3 9.5 7 9.5s7-4 7-9.5"/><path d="M9.5 11h.01M14.5 11h.01"/><path d="M12 14l-1.6 1.4a2.2 2.2 0 0 0 3.2 0Z"/>',
+    rabbit:'<path d="M9.5 8.5C8.5 4.5 7.5 2.5 6.5 2.5 5.3 2.5 5.5 6 7.5 9.5M14.5 8.5c1-4 2-6 3-6 1.2 0 1 3.5-1 7"/><circle cx="12" cy="14.5" r="5.5"/><path d="M10 14h.01M14 14h.01"/><path d="M12 16.5v.01"/>',
+    owl:'<path d="M5 6c1 1.2 2 1.8 3 2M19 6c-1 1.2-2 1.8-3 2"/><path d="M12 21c-4.4 0-7.5-3.6-7.5-8.5S7.6 4 12 4s7.5 3.6 7.5 8.5S16.4 21 12 21Z"/><circle cx="9" cy="11" r="2"/><circle cx="15" cy="11" r="2"/><path d="m12 14 1 1.2-1 .8-1-.8Z"/>',
+    bear:'<circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="6.5" r="2.5"/><path d="M12 20c-3.9 0-7-3.1-7-7s3.1-6.5 7-6.5 7 2.9 7 6.5-3.1 7-7 7Z"/><path d="M10 12h.01M14 12h.01"/><path d="M12 15v1M10.4 16.5a2.2 2.2 0 0 0 3.2 0"/>',
+    seedling:'<path d="M12 21v-6"/><path d="M12 15c-3.3 0-5.5-2-5.5-5 3.3 0 5.5 2 5.5 5Z"/>',
+    tree:'<path d="M12 22v-7"/><path d="M12 15a6.5 6.5 0 0 0 2.2-12.6A5 5 0 0 0 5.5 6 4.5 4.5 0 0 0 6 15Z"/>',
+    flag:'<path d="M6 21V3.5"/><path d="M6 4.5h11.5l-2.2 3.3 2.2 3.2H6"/>',
+    pine:'<path d="M12 3 7 11h3l-3 5h10l-3-5h3Z"/><path d="M12 16v5"/>',
+    droplet:'<path d="M12 3.5s6 6.3 6 10.3a6 6 0 0 1-12 0c0-4 6-10.3 6-10.3Z"/>',
+    butterfly:'<path d="M12 7.5v9"/><path d="M12 9.5C9.8 5.5 4 5.5 4 9.8c0 3.5 5 4.5 8 1.7"/><path d="M12 9.5c2.2-4 8-4 8 .3 0 3.5-5 4.5-8 1.7"/>',
+    gem:'<path d="M7 4h10l3 5-8 11L4 9Z"/><path d="M4 9h16M9 4 7 9l5 11 5-11-2-5"/>',
+    umbrella:'<path d="M12 3.5v17"/><path d="M4 12a8 8 0 0 1 16 0c-1.5-1-2.8-1-4 0-1.2-1-2.5-1-4 0-1.5-1-2.8-1-4 0Z"/>',
+    map:'<path d="m9 4-5.5 2v14L9 18l6 2 5.5-2V4L15 6 9 4Z"/><path d="M9 4v14M15 6v14"/>',
+    volcano:'<path d="M3 20h18"/><path d="m7.5 20 3.2-6h2.6l3.2 6"/><path d="M10 9V5l2 2.2L14 4v5"/>',
+    dunes:'<path d="M3 17c2.5 0 3.5-2 6-2s3.5 2 6 2 2.5-1.5 6-1.5"/><path d="M3 20h18"/><circle cx="17" cy="7" r="2.5"/>',
+    palm:'<path d="M12 21c0-5-.5-8-1-10"/><path d="M11 11c-1-3-4-4-7-3 1.2 2.6 3.8 3.4 7 3Z"/><path d="M11 11c1-3 4-4 7-3-1.2 2.6-3.8 3.4-7 3Z"/><path d="M11 11c0-2 1.5-3.5 4-3"/>',
+    city:'<path d="M3 21V10l5-2.5V21"/><path d="M8 21V5l7 2.5V21"/><path d="M15 21v-8l6 2.5V21"/><path d="M11 11v.01M11 15v.01M18 16v.01"/>',
+    rainbow:'<path d="M4 18a8 8 0 0 1 16 0"/><path d="M7 18a5 5 0 0 1 10 0"/><path d="M10 18a2 2 0 0 1 4 0"/>',
+    mushroom:'<path d="M4.5 11.5a7.5 7.5 0 0 1 15 0Z"/><path d="M10 11.5v6a2 2 0 0 0 4 0v-6"/><path d="M9 8.5h.01M13 9h.01"/>',
+    swan:'<path d="M5.5 20c0-5.5 3.2-8.5 7.5-8.5"/><path d="M13 11.5c0-3.2 2-5.5 4.2-5.5 1.4 0 2.3.9 2.3 2 0 1.4-1.2 2-1.2 2"/><path d="M18.8 9.3h.01"/><path d="M5.5 20h12"/>',
+    cloud:'<path d="M7.5 18a4.5 4.5 0 0 1-.3-9 5.5 5.5 0 0 1 10.4-1A3.8 3.8 0 0 1 17 18Z"/>',
+    star:'<path d="m12 3.2 2.6 5.7 6.2.7-4.6 4.2 1.3 6.1L12 16.9l-5.5 3 1.3-6.1L3.2 9.6l6.2-.7Z"/>',
+    rocket:'<path d="M12 3c3 1.6 5 5.2 5 9.2L15 16H9l-2-3.8C7 8.2 9 4.6 12 3Z"/><circle cx="12" cy="9.5" r="1.6"/><path d="M9 16l-2 4 3-1.5M15 16l2 4-3-1.5"/>',
+    sparkle:'<path d="M12 3c.6 4.3 1.5 5.2 5.8 5.8-4.3.6-5.2 1.5-5.8 5.8-.6-4.3-1.5-5.2-5.8-5.8C10.5 8.2 11.4 7.3 12 3Z"/><path d="M18 14.5c.3 1.8.7 2.2 2.5 2.5-1.8.3-2.2.7-2.5 2.5-.3-1.8-.7-2.2-2.5-2.5 1.8-.3 2.2-.7 2.5-2.5Z"/>',
+    trophy:'<path d="M8 4h8v4.5a4 4 0 0 1-8 0Z"/><path d="M8 5.5H5V7a3 3 0 0 0 3 3M16 5.5h3V7a3 3 0 0 1-3 3"/><path d="M12 12.5V16M9 20h6M9.8 20l.6-4h3.2l.6 4"/>',
+    dice:'<rect x="4" y="4" width="16" height="16" rx="4.5"/><circle cx="8.5" cy="8.5" r="1.1"/><circle cx="15.5" cy="8.5" r="1.1"/><circle cx="8.5" cy="15.5" r="1.1"/><circle cx="15.5" cy="15.5" r="1.1"/>',
+    bulb:'<path d="M9.5 18.5h5M10.5 21h3"/><path d="M12 3a6 6 0 0 0-3.7 10.7c.7.6 1.1 1.3 1.2 2.1h5c.1-.8.5-1.5 1.2-2.1A6 6 0 0 0 12 3Z"/>',
+    back:'<path d="M9 14.5 4.5 10 9 5.5"/><path d="M4.5 10h9.5a5 5 0 0 1 0 10H12"/>',
+    refresh:'<path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v4h-4"/>'
+  };
+  function icon(k){return '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(ICONS[k]||'')+'</svg>';}
+  /* hydrate every static [data-icon] element */
+  document.querySelectorAll('[data-icon]').forEach(el=>{el.innerHTML=icon(el.dataset.icon);});
+
   /* ---- moments data ---- */
   const moments = [
-    {key:'bath', emoji:'🛁', label:'אמבטיה', tips:[
+    {key:'bath', icon:'bath', label:'אמבטיה', tips:[
       'שימוש בפעלים ספציפיים: להתפשט, לחלוץ, ללבוש, להתקלח, לשטוף, לסבן, לחפוף.',
       'העשרת השיח בתארים והפכים: נקי מול מלוכלך, רטוב מול יבש, חם, פושר, קר.',
       'המשגת קטגוריות וחלקי גוף: "כלי רחצה", ברכיים, כתפיים, מרפק, כף יד וכף רגל.'
     ]},
-    {key:'kitchen', emoji:'🍳', label:'מטבח', tips:[
+    {key:'kitchen', icon:'kitchen', label:'מטבח', tips:[
       'מנו יחד מרכיבים ופעולות: לחתוך, לערבב, לטעום, למזוג.',
       'דברו על מרקמים וטעמים: חלק, גס, מתוק, חמוץ, חם, קר.',
       'בקשו עזרה קטנה ותנו הוראות — הזדמנות נהדרת להבנת שפה.'
     ]},
-    {key:'drive', emoji:'🚗', label:'נסיעה', tips:[
+    {key:'drive', icon:'drive', label:'נסיעה', tips:[
       'תארו מה רואים בחוץ: רכבים, צבעים, בעלי חיים, מבנים.',
       'שירו שירים מוכרים והשלימו מילים יחד.',
       'שחקו ב"מי רואה..." לחיזוק אוצר מילים וקשב.'
     ]},
-    {key:'getready', emoji:'👕', label:'התארגנות', tips:[
+    {key:'getready', icon:'shirt', label:'התארגנות', tips:[
       'תארו את סדר הפעולות: קודם, אחר כך, בסוף.',
       'מנו פריטי לבוש וחלקי גוף תוך כדי הלבשה.',
       'תנו בחירה: "החולצה הכחולה או הירוקה?" לעידוד הבעה.'
     ]},
-    {key:'trips', emoji:'🌳', label:'טיולים', tips:[
+    {key:'trips', icon:'mountain', label:'טיולים', tips:[
       'תייגו את מה שפוגשים בטבע: עץ, פרח, אבן, ציפור.',
       'דברו על תחושות: חם, קריר, רך, מחוספס.',
       'ספרו סיפור קטן על ההרפתקה תוך כדי הליכה.'
     ]},
-    {key:'tidy', emoji:'🧺', label:'סידור הבית', tips:[
+    {key:'tidy', icon:'tidy', label:'סידור הבית', tips:[
       'מיינו לפי קטגוריות: צעצועים, ספרים, בגדים.',
       'השתמשו במילות מיקום: בתוך, על, מתחת, ליד.',
       'הפכו את הסידור למשחק עם הוראות פשוטות.'
     ]},
-    {key:'sleep', emoji:'🌙', label:'שינה', tips:[
+    {key:'sleep', icon:'moon', label:'שינה', tips:[
       'סכמו יחד את היום: "מה עשינו היום?"',
       'דברו ברוגע על רגשות שעלו במהלך היום.',
       'שגרה קבועה של מילים מרגיעות לפני השינה.'
     ]},
-    {key:'story', emoji:'📖', label:'סיפור', tips:[
+    {key:'story', icon:'story', label:'סיפור', tips:[
       'עצרו ושאלו "מה את חושבת שיקרה עכשיו?"',
       'הצביעו על תמונות ותייגו אותן יחד.',
       'חברו את הסיפור לחיים: "גם לנו יש את זה בבית!"'
     ]},
-    {key:'art', emoji:'🎨', label:'יצירה', tips:[
+    {key:'art', icon:'art', label:'יצירה', tips:[
       'תארו צבעים, צורות וגדלים תוך כדי יצירה.',
       'השתמשו בפעלים: לגזור, להדביק, לצבוע, לקפל.',
       'תנו לילד לספר על מה שיצר — בלי לתקן.'
     ]},
-    {key:'garden', emoji:'🌻', label:'גינה', tips:[
+    {key:'garden', icon:'garden', label:'גינה', tips:[
       'מנו צמחים, חרקים וכלי גינון.',
       'דברו על תהליך: לזרוע, להשקות, לצמוח.',
       'תארו תחושות מהאדמה, העלים והפרחים.'
     ]},
-    {key:'shopping', emoji:'🛒', label:'קניות', tips:[
+    {key:'shopping', icon:'shopping', label:'קניות', tips:[
       'הכינו יחד רשימה ותייגו מוצרים.',
       'דברו על כמויות: הרבה, מעט, אחד, עוד.',
       'בקשו מהילד לאתר פריט — חיזוק הבנה וקשב.'
     ]},
-    {key:'home', emoji:'🏠', label:'בית', tips:[
+    {key:'home', icon:'home', label:'בית', tips:[
       'כל פינה בבית היא הזדמנות לשיחה ולמשחק.',
       'שלבו שפה בפעולות הכי שגרתיות שביום.',
       'הקשיבו, הגיבו, וחזרו על מה שהילד אומר.'
@@ -828,14 +906,14 @@
     moments.forEach(m=>{
       const el=document.createElement('div');
       el.className='moment';
-      el.innerHTML=`<span class="m-emoji">${m.emoji}</span><span class="m-label">${m.label}</span>`;
+      el.innerHTML=`<span class="m-emoji">${icon(m.icon)}</span><span class="m-label">${m.label}</span>`;
       el.addEventListener('click',(e)=>{
         const r=document.createElement('span');r.className='ripple';
         const size=Math.max(el.clientWidth,el.clientHeight);
         r.style.width=r.style.height=size+'px';
         r.style.left=(e.offsetX-size/2)+'px';r.style.top=(e.offsetY-size/2)+'px';
         el.appendChild(r);setTimeout(()=>r.remove(),600);
-        detail.innerHTML=`<h3>${m.emoji} ${m.label}</h3>`+m.tips.map(t=>`<p>• ${t}</p>`).join('');
+        detail.innerHTML=`<h3>${icon(m.icon)} ${m.label}</h3>`+m.tips.map(t=>`<p>• ${t}</p>`).join('');
         detail.classList.add('open');
         detail.scrollIntoView({behavior:'smooth',block:'center'});
       });
@@ -950,26 +1028,26 @@
 
   // 20 themed stations — each its own world
   const STATIONS=[
-    {n:"תחנת הזינוק", e:"🏡", c1:"#8FD694", c2:"#5BB368"},
-    {n:"יער הלחישות", e:"🌲", c1:"#4F9E6A", c2:"#2F7048"},
-    {n:"אגם הבדולח", e:"💧", c1:"#7FD3E8", c2:"#3FA9CC"},
-    {n:"גבעת הפרפרים", e:"🦋", c1:"#F4A6C8", c2:"#E66BA0"},
-    {n:"מערת הגבישים", e:"💎", c1:"#B79CE6", c2:"#8763C9"},
-    {n:"חוף הזהב", e:"🏖️", c1:"#FBE0A6", c2:"#F4B95E"},
-    {n:"אי האוצר", e:"🗺️", c1:"#5FD3B8", c2:"#2DA88C"},
-    {n:"הר הגעש", e:"🌋", c1:"#F2925E", c2:"#D9532E"},
-    {n:"מדבר הזהב", e:"🏜️", c1:"#ECC579", c2:"#C99A3C"},
-    {n:"נווה המדבר", e:"🌴", c1:"#7FCBA0", c2:"#3F9E78"},
-    {n:"עיר האורות", e:"🌃", c1:"#6E84C9", c2:"#3F4E9E"},
-    {n:"גשר הקשת", e:"🌈", c1:"#F2A6D6", c2:"#9C7BE6"},
-    {n:"יער הפטריות", e:"🍄", c1:"#E08AB5", c2:"#B05598"},
-    {n:"אגם הברבורים", e:"🦢", c1:"#BFE3F2", c2:"#7FB8D9"},
-    {n:"מבצר העננים", e:"☁️", c1:"#CFE0F2", c2:"#9CB8E0"},
-    {n:"שדה הכוכבים", e:"⭐", c1:"#8C8CE6", c2:"#5151B0"},
-    {n:"תחנת החלל", e:"🚀", c1:"#7E6BC9", c2:"#4A3F8C"},
-    {n:"כוכב הירח", e:"🌙", c1:"#C9CEDC", c2:"#8C93AB"},
-    {n:"שביל הזהב", e:"✨", c1:"#F7D98C", c2:"#E0B04E"},
-    {n:"ארמון הסיום", e:"🏆", c1:"#F4C95E", c2:"#D99A2E"}
+    {n:"תחנת הזינוק", e:"flag", c1:"#8FD694", c2:"#5BB368"},
+    {n:"יער הלחישות", e:"pine", c1:"#4F9E6A", c2:"#2F7048"},
+    {n:"אגם הבדולח", e:"droplet", c1:"#7FD3E8", c2:"#3FA9CC"},
+    {n:"גבעת הפרפרים", e:"butterfly", c1:"#F4A6C8", c2:"#E66BA0"},
+    {n:"מערת הגבישים", e:"gem", c1:"#B79CE6", c2:"#8763C9"},
+    {n:"חוף הזהב", e:"umbrella", c1:"#FBE0A6", c2:"#F4B95E"},
+    {n:"אי האוצר", e:"map", c1:"#5FD3B8", c2:"#2DA88C"},
+    {n:"הר הגעש", e:"volcano", c1:"#F2925E", c2:"#D9532E"},
+    {n:"מדבר הזהב", e:"dunes", c1:"#ECC579", c2:"#C99A3C"},
+    {n:"נווה המדבר", e:"palm", c1:"#7FCBA0", c2:"#3F9E78"},
+    {n:"עיר האורות", e:"city", c1:"#6E84C9", c2:"#3F4E9E"},
+    {n:"גשר הקשת", e:"rainbow", c1:"#F2A6D6", c2:"#9C7BE6"},
+    {n:"יער הפטריות", e:"mushroom", c1:"#E08AB5", c2:"#B05598"},
+    {n:"אגם הברבורים", e:"swan", c1:"#BFE3F2", c2:"#7FB8D9"},
+    {n:"מבצר העננים", e:"cloud", c1:"#CFE0F2", c2:"#9CB8E0"},
+    {n:"שדה הכוכבים", e:"star", c1:"#8C8CE6", c2:"#5151B0"},
+    {n:"תחנת החלל", e:"rocket", c1:"#7E6BC9", c2:"#4A3F8C"},
+    {n:"כוכב הירח", e:"moon", c1:"#C9CEDC", c2:"#8C93AB"},
+    {n:"שביל הזהב", e:"sparkle", c1:"#F7D98C", c2:"#E0B04E"},
+    {n:"ארמון הסיום", e:"trophy", c1:"#F4C95E", c2:"#D99A2E"}
   ];
 
   // winding path positions in viewBox coords (1000 x 1700), serpentine
@@ -989,7 +1067,7 @@
     }
   })();
 
-  let gState={level:null,char:"🦊",pos:0,deck:[],idx:0,rolling:false,started:false};
+  let gState={level:null,char:"fox",pos:0,deck:[],idx:0,rolling:false,started:false};
 
   function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 
@@ -1015,10 +1093,10 @@
     const hasLvl=document.querySelector('.level-card.sel');
     const hint=document.getElementById('setupHint');
     if(hasChar&&hasLvl){
-      hint.textContent='יוצאים לדרך… 🚂';
+      hint.textContent='יוצאים לדרך…';
       setTimeout(()=>startLevel(gState.pendingLevel),350);
-    }else if(hasChar){hint.textContent='עכשיו בחרו רמת גיל 👇';}
-    else if(hasLvl){hint.textContent='עכשיו בחרו דמות 👆';}
+    }else if(hasChar){hint.textContent='עכשיו בחרו רמת גיל';}
+    else if(hasLvl){hint.textContent='עכשיו בחרו דמות';}
   }
 
   function startLevel(lvl){
@@ -1030,16 +1108,16 @@
     document.getElementById('winScreen').style.display='none';
     document.getElementById('questionCard').style.display='block';
     document.getElementById('lvlPill').textContent=LEVEL_META[lvl];
-    document.getElementById('playerToken').textContent=gState.char;
+    document.getElementById('playerToken').innerHTML=icon(gState.char);
     buildMap();
     placeToken(0,false);
     cameraTo(0);
     updateBanner(0);
-    document.getElementById('qText').textContent='גלגלו את הקובייה כדי לצאת לדרך! 🎲';
+    document.getElementById('qText').textContent='גלגלו את הקובייה כדי לצאת לדרך!';
     document.getElementById('curStation').textContent='0';
     document.getElementById('hintBtn').style.display='none';
     document.getElementById('qHint').className='q-hint';document.getElementById('qHint').textContent='';
-    const btn=document.getElementById('rollBtn');btn.disabled=false;btn.textContent='🎲 גלגלו את הקובייה';
+    const btn=document.getElementById('rollBtn');btn.disabled=false;btn.querySelector('.rl').textContent='גלגלו את הקובייה';
     const d=document.getElementById('dice');d.className='dice';d.style.transform='rotateX(-20deg) rotateY(20deg)';
   }
 
@@ -1066,7 +1144,7 @@
       el.style.left=(p.x/1000*100)+'%';
       el.style.top=(p.y/1700*1700)+'px';
       el.innerHTML=`<div class="st-num">${i+1}</div>
-        <div class="st-pin" style="background:linear-gradient(150deg,${s.c1},${s.c2})"><span>${s.e}</span></div>
+        <div class="st-pin" style="background:linear-gradient(150deg,${s.c1},${s.c2})"><span>${icon(s.e)}</span></div>
         <div class="st-label">${s.n}</div>`;
       layer.appendChild(el);
     });
@@ -1103,7 +1181,7 @@
 
   function updateBanner(i){
     const s=STATIONS[i];
-    document.getElementById('sbEmoji').textContent=s.e;
+    document.getElementById('sbEmoji').innerHTML=icon(s.e);
     document.getElementById('sbNum').textContent='תחנה '+(i+1);
     document.getElementById('sbName').textContent=s.n;
   }
@@ -1147,12 +1225,12 @@
   function showQuestion(){
     const card=gState.deck[gState.idx % gState.deck.length];
     document.getElementById('qText').textContent=card.q;
-    document.getElementById('qHint').textContent='💡 '+card.h;
+    document.getElementById('qHint').textContent=card.h;
     document.getElementById('qHint').className='q-hint';
-    document.getElementById('hintBtn').style.display='inline-block';
+    document.getElementById('hintBtn').style.display='inline-flex';
     const btn=document.getElementById('rollBtn');
     btn.disabled=false;
-    btn.textContent='🎲 ענו נכון? גלגלו שוב!';
+    btn.querySelector('.rl').textContent='ענו נכון? גלגלו שוב!';
     document.getElementById('questionCard').scrollIntoView({behavior:'smooth',block:'center'});
   }
 
@@ -1186,7 +1264,7 @@
     document.getElementById('gameBoard').style.display='none';
     document.getElementById('gameSetup').style.display='block';
     document.querySelectorAll('.char-card,.level-card').forEach(x=>x.classList.remove('sel'));
-    document.getElementById('setupHint').textContent='בחרו דמות ורמה כדי להתחיל את ההרפתקה ✨';
+    document.getElementById('setupHint').textContent='בחרו דמות ורמה כדי להתחיל את ההרפתקה';
     document.getElementById('gameSetup').scrollIntoView({behavior:'smooth',block:'center'});
   }
 
