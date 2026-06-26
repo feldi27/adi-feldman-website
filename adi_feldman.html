@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>עדי פלדמן — קלינאית תקשורת ומדריכת הורים</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800&family=Assistant:wght@300;400;500;600;700&family=Frank+Ruhl+Libre:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F5EFE4;
+    --cream-deep:#EDE3D2;
+    --ink:#3D2B1F;
+    --ink-soft:#6B5847;
+    --accent:#C9956B;
+    --accent-deep:#B07B4F;
+    --rose:#D9A98C;
+    --white:#FEFCF8;
+    --sage:#A8B49A;
+    --shadow:rgba(61,43,31,.10);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Assistant',sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.75;
+    font-size:18px;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{font-family:'Frank Ruhl Libre','Heebo',serif}
+  ::selection{background:var(--accent);color:var(--white)}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;top:0;right:0;left:0;z-index:100;
+    background:rgba(245,239,228,.88);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(201,149,107,.22);
+    transition:padding .3s;
+  }
+  .nav-inner{
+    max-width:1200px;margin:0 auto;padding:16px 28px;
+    display:flex;align-items:center;justify-content:space-between;gap:20px;
+  }
+  .logo{
+    font-family:'Frank Ruhl Libre',serif;font-weight:700;font-size:1.55rem;
+    color:var(--ink);letter-spacing:.5px;cursor:pointer;white-space:nowrap;
+  }
+  .logo span{color:var(--accent)}
+  nav ul{display:flex;list-style:none;gap:6px;flex-wrap:wrap}
+  nav a{
+    color:var(--ink-soft);text-decoration:none;font-weight:500;font-size:.97rem;
+    padding:8px 13px;border-radius:30px;transition:.25s;cursor:pointer;
+  }
+  nav a:hover,nav a.active{background:var(--accent);color:var(--white)}
+  .burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px}
+  .burger span{width:26px;height:2.5px;background:var(--ink);border-radius:2px;transition:.3s}
+
+  /* ---------- PAGES ---------- */
+  main{padding-top:78px}
+  .page{display:none;animation:fade .6s ease}
+  .page.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  section{max-width:1140px;margin:0 auto;padding:70px 28px}
+  .eyebrow{
+    font-family:'Heebo',sans-serif;font-weight:600;letter-spacing:3px;
+    text-transform:uppercase;font-size:.78rem;color:var(--accent-deep);margin-bottom:14px;
+  }
+  h2.section-title{font-size:2.5rem;font-weight:700;line-height:1.2;margin-bottom:8px}
+  .lead{font-size:1.2rem;color:var(--ink-soft);max-width:680px;margin-top:18px}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:calc(100vh - 78px);
+    display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:50px;
+    max-width:1200px;margin:0 auto;padding:40px 28px;
+  }
+  .hero-text .eyebrow{margin-bottom:20px}
+  .hero h1{
+    font-size:clamp(2.8rem,5.5vw,4.4rem);font-weight:700;line-height:1.08;color:var(--ink);
+  }
+  .hero h1 em{font-style:normal;color:var(--accent);display:block}
+  .hero .sub{font-size:1.35rem;color:var(--ink-soft);margin:22px 0 14px;font-weight:500}
+  .hero p.intro{font-size:1.12rem;color:var(--ink-soft);max-width:520px;margin-bottom:34px}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{
+    display:inline-block;padding:14px 30px;border-radius:40px;font-weight:600;
+    font-size:1rem;text-decoration:none;cursor:pointer;transition:.28s;border:none;font-family:inherit;
+  }
+  .btn-primary{background:var(--accent);color:var(--white);box-shadow:0 8px 22px rgba(176,123,79,.28)}
+  .btn-primary:hover{background:var(--accent-deep);transform:translateY(-2px)}
+  .btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--accent)}
+  .btn-ghost:hover{background:var(--accent);color:var(--white)}
+
+  .hero-visual{position:relative;display:flex;justify-content:center;align-items:center}
+  .blob{
+    width:min(420px,80vw);aspect-ratio:1;border-radius:48% 52% 56% 44%/52% 46% 54% 48%;
+    background:linear-gradient(140deg,var(--rose),var(--accent));
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 30px 60px rgba(176,123,79,.30);
+    animation:morph 9s ease-in-out infinite;
+    position:relative;
+  }
+  @keyframes morph{
+    0%,100%{border-radius:48% 52% 56% 44%/52% 46% 54% 48%}
+    50%{border-radius:56% 44% 48% 52%/46% 54% 46% 54%}
+  }
+  .blob .initials{font-family:'Frank Ruhl Libre',serif;font-size:5rem;color:var(--white);font-weight:700;opacity:.92}
+  .floating-tag{
+    position:absolute;background:var(--white);padding:11px 20px;border-radius:30px;
+    box-shadow:0 10px 26px var(--shadow);font-weight:600;font-size:.95rem;color:var(--ink);
+    display:flex;align-items:center;gap:8px;
+  }
+  .floating-tag .dot{width:9px;height:9px;border-radius:50%;background:var(--sage)}
+  .tag-1{top:8%;right:-6%;animation:float1 5s ease-in-out infinite}
+  .tag-2{bottom:12%;left:-8%;animation:float2 6s ease-in-out infinite}
+  @keyframes float1{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+  @keyframes float2{0%,100%{transform:translateY(0)}50%{transform:translateY(12px)}}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:54px;align-items:center}
+  .about-img{
+    aspect-ratio:4/5;border-radius:24px;background:linear-gradient(160deg,var(--cream-deep),var(--rose));
+    display:flex;align-items:center;justify-content:center;box-shadow:0 24px 50px var(--shadow);
+    font-family:'Frank Ruhl Libre',serif;font-size:3.2rem;color:var(--white);position:relative;overflow:hidden;
+  }
+  .about-img::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(254,252,248,.3),transparent 60%)}
+  .about-text p{margin-bottom:18px;font-size:1.1rem}
+  .quote-card{
+    background:var(--white);border-right:5px solid var(--accent);
+    padding:26px 30px;border-radius:14px;margin-top:28px;box-shadow:0 12px 30px var(--shadow);
+    font-family:'Frank Ruhl Libre',serif;font-size:1.25rem;color:var(--ink);font-style:italic;line-height:1.6;
+  }
+
+  /* ---------- CARDS / SERVICES ---------- */
+  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:26px;margin-top:46px}
+  .card{
+    background:var(--white);padding:36px 32px;border-radius:20px;box-shadow:0 14px 34px var(--shadow);
+    transition:.3s;border:1px solid transparent;
+  }
+  .card:hover{transform:translateY(-6px);border-color:rgba(201,149,107,.35)}
+  .card .ico{
+    width:56px;height:56px;border-radius:16px;background:var(--cream-deep);
+    display:flex;align-items:center;justify-content:center;font-size:1.7rem;margin-bottom:20px;
+  }
+  .card h3{font-size:1.4rem;margin-bottom:12px;color:var(--ink)}
+  .card p{color:var(--ink-soft);font-size:1.04rem}
+
+  /* ---------- MOMENTS (signature) ---------- */
+  .moments-intro{text-align:center;max-width:740px;margin:0 auto 50px}
+  .moments-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .moment{
+    position:relative;overflow:hidden;background:var(--white);border-radius:18px;
+    padding:30px 16px;text-align:center;cursor:pointer;transition:.3s;
+    box-shadow:0 8px 22px var(--shadow);border:1px solid transparent;
+  }
+  .moment:hover{transform:translateY(-5px);background:var(--accent);border-color:var(--accent)}
+  .moment:hover .m-emoji,.moment:hover .m-label{color:var(--white)}
+  .moment .m-emoji{font-size:2.1rem;display:block;margin-bottom:10px;transition:.3s}
+  .moment .m-label{font-weight:600;font-size:1.05rem;color:var(--ink);transition:.3s}
+  .moment .ripple{position:absolute;border-radius:50%;background:rgba(254,252,248,.5);transform:scale(0);animation:rip .6s ease-out;pointer-events:none}
+  @keyframes rip{to{transform:scale(4);opacity:0}}
+
+  .moment-detail{
+    margin-top:36px;background:var(--white);border-radius:20px;padding:0;
+    max-height:0;overflow:hidden;transition:max-height .5s ease,padding .5s ease;box-shadow:0 14px 34px var(--shadow);
+  }
+  .moment-detail.open{max-height:600px;padding:34px 38px}
+  .moment-detail h3{font-size:1.6rem;color:var(--accent-deep);margin-bottom:16px;display:flex;align-items:center;gap:12px}
+  .moment-detail p{color:var(--ink-soft);margin-bottom:14px;font-size:1.08rem}
+
+  /* ---------- WORKSHOPS ---------- */
+  .workshop-feature{
+    display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:24px;overflow:hidden;
+    box-shadow:0 22px 50px var(--shadow);margin-top:44px;
+  }
+  .workshop-visual{
+    background:linear-gradient(150deg,var(--accent),var(--rose));padding:60px 40px;
+    display:flex;flex-direction:column;justify-content:center;color:var(--white);
+  }
+  .workshop-visual .badge{background:rgba(254,252,248,.25);align-self:flex-start;padding:6px 16px;border-radius:20px;font-weight:600;font-size:.85rem;margin-bottom:20px}
+  .workshop-visual h3{font-size:2.4rem;color:var(--white);margin-bottom:14px}
+  .workshop-visual p{opacity:.95;font-size:1.1rem}
+  .workshop-body{background:var(--white);padding:60px 44px}
+  .workshop-body ul{list-style:none;margin:22px 0}
+  .workshop-body li{padding:12px 0;border-bottom:1px solid var(--cream-deep);display:flex;gap:12px;align-items:flex-start;color:var(--ink-soft)}
+  .workshop-body li::before{content:'✦';color:var(--accent);font-weight:700;flex-shrink:0}
+
+  /* ---------- BOOK ---------- */
+  .book-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:54px;align-items:center}
+  .book-cover{
+    aspect-ratio:3/4;border-radius:10px 18px 18px 10px;
+    background:linear-gradient(155deg,var(--rose),var(--accent-deep));
+    box-shadow:0 30px 60px rgba(176,123,79,.4);display:flex;flex-direction:column;
+    align-items:center;justify-content:center;padding:40px;text-align:center;
+    position:relative;transition:.4s;transform:perspective(1000px) rotateY(-8deg);
+  }
+  .book-cover:hover{transform:perspective(1000px) rotateY(0deg)}
+  .book-cover .heart{font-size:3rem;margin-bottom:20px}
+  .book-cover h3{font-family:'Frank Ruhl Libre',serif;color:var(--white);font-size:1.9rem;line-height:1.3}
+  .book-cover .author{color:rgba(254,252,248,.85);margin-top:18px;font-weight:600}
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px}
+  .contact-info p{margin-bottom:14px;font-size:1.1rem;color:var(--ink-soft)}
+  .contact-line{display:flex;align-items:center;gap:14px;margin-bottom:18px;font-size:1.1rem}
+  .contact-line .c-ico{width:46px;height:46px;border-radius:14px;background:var(--cream-deep);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+  form{background:var(--white);padding:40px;border-radius:20px;box-shadow:0 16px 38px var(--shadow)}
+  .field{margin-bottom:20px}
+  .field label{display:block;font-weight:600;margin-bottom:8px;color:var(--ink)}
+  .field input,.field textarea{
+    width:100%;padding:13px 16px;border:1.5px solid var(--cream-deep);border-radius:12px;
+    font-family:inherit;font-size:1rem;background:var(--cream);color:var(--ink);transition:.25s;
+  }
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--accent);background:var(--white)}
+  .field textarea{resize:vertical;min-height:120px}
+  .form-msg{margin-top:14px;font-weight:600;color:var(--sage);display:none}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink);color:var(--cream);padding:50px 28px 30px;margin-top:40px}
+  .footer-inner{max-width:1140px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px}
+  .footer-inner .logo{color:var(--cream)}
+  .footer-inner .logo span{color:var(--accent)}
+  footer p{color:rgba(245,239,228,.7);font-size:.95rem;margin-top:10px}
+  .footer-links{display:flex;gap:24px;flex-wrap:wrap}
+  .footer-links a{color:rgba(245,239,228,.8);text-decoration:none;cursor:pointer;transition:.2s}
+  .footer-links a:hover{color:var(--accent)}
+  .copyright{text-align:center;margin-top:36px;padding-top:24px;border-top:1px solid rgba(245,239,228,.15);color:rgba(245,239,228,.55);font-size:.88rem}
+
+  /* ---------- GAME (board-game world) ---------- */
+  #game section{position:relative}
+  .game-setup{margin-top:46px;text-align:center}
+  .game-h3{font-family:'Frank Ruhl Libre',serif;font-size:1.5rem;margin-bottom:24px;color:var(--ink)}
+
+  /* character picker */
+  .char-picker{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;max-width:620px;margin:0 auto}
+  .char-card{
+    width:128px;border:3px solid transparent;border-radius:22px;padding:20px 10px;cursor:pointer;
+    background:var(--white);box-shadow:0 10px 24px var(--shadow);font-family:inherit;
+    display:flex;flex-direction:column;align-items:center;gap:8px;transition:.25s;
+  }
+  .char-card:hover{transform:translateY(-5px)}
+  .char-card.sel{border-color:var(--accent);background:#FFF7EC;transform:translateY(-5px)}
+  .char-card .char-face{font-size:3rem;filter:drop-shadow(0 4px 6px rgba(0,0,0,.18))}
+  .char-card .char-name{font-weight:700;color:var(--ink)}
+
+  .level-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:920px;margin:0 auto}
+  .level-card{
+    border:3px solid transparent;border-radius:26px;padding:34px 22px;cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;gap:10px;font-family:inherit;text-align:center;
+    color:#fff;position:relative;transition:transform .3s,box-shadow .3s,border-color .2s;
+  }
+  .lc-1{background:linear-gradient(150deg,#7BC97F,#52A86A);box-shadow:0 12px 0 #3d8052,0 22px 34px rgba(61,128,82,.4)}
+  .lc-2{background:linear-gradient(150deg,#F0A85D,#E07B3E);box-shadow:0 12px 0 #b85e28,0 22px 34px rgba(184,94,40,.4)}
+  .lc-3{background:linear-gradient(150deg,#8C9EE8,#6171C9);box-shadow:0 12px 0 #4a56a0,0 22px 34px rgba(74,86,160,.4)}
+  .level-card:hover{transform:translateY(-6px)}
+  .level-card.sel{border-color:#fff;outline:3px solid var(--accent)}
+  .level-card:active{transform:translateY(6px)}
+  .lvl-emoji{font-size:3rem;filter:drop-shadow(0 4px 6px rgba(0,0,0,.2))}
+  .lvl-title{font-family:'Frank Ruhl Libre',serif;font-size:1.7rem;font-weight:700}
+  .lvl-age{font-weight:800;font-size:1.15rem;background:rgba(255,255,255,.25);padding:3px 16px;border-radius:20px}
+  .lvl-desc{font-size:.98rem;line-height:1.5;opacity:.95}
+  .setup-hint{margin-top:30px;color:var(--ink-soft);font-weight:600}
+
+  .game-board-wrap{margin-top:36px;max-width:1000px;margin-inline:auto}
+  .game-topbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-bottom:22px}
+  .btn-sm{padding:9px 18px;font-size:.92rem}
+  .progress-pill{background:var(--white);padding:9px 20px;border-radius:30px;font-weight:800;color:var(--ink);box-shadow:0 6px 16px var(--shadow)}
+  .progress-pill span{color:var(--accent-deep)}
+  .lvl-pill{background:var(--accent);color:var(--white);padding:9px 20px;border-radius:30px;font-weight:700;font-size:.92rem}
+
+  /* MAP viewport — the board */
+  .map-viewport{
+    height:560px;overflow:hidden;border-radius:28px;position:relative;
+    background:
+      radial-gradient(circle at 20% 12%,rgba(255,255,255,.5),transparent 40%),
+      linear-gradient(170deg,#BFE3F2 0%,#CFE9D6 32%,#F4E7C7 64%,#F3D9B0 100%);
+    box-shadow:0 22px 50px rgba(120,86,50,.3),inset 0 0 60px rgba(255,255,255,.3);
+    border:5px solid #fff;
+  }
+  .map-world{position:absolute;top:0;left:0;width:100%;height:1700px;transition:transform 1.1s cubic-bezier(.4,.1,.2,1)}
+  .map-rail{position:absolute;top:0;left:0;width:100%;height:1700px;z-index:1}
+
+  .stations-layer{position:absolute;top:0;left:0;width:100%;height:1700px;z-index:2}
+  .station{
+    position:absolute;width:128px;transform:translate(-50%,-50%);text-align:center;
+  }
+  .station .st-pin{
+    width:96px;height:96px;border-radius:50% 50% 50% 8px;margin:0 auto;
+    display:flex;align-items:center;justify-content:center;font-size:2.6rem;
+    box-shadow:0 10px 0 rgba(0,0,0,.14),0 16px 22px rgba(0,0,0,.22);
+    border:4px solid rgba(255,255,255,.85);transform:rotate(-45deg);position:relative;transition:.4s;
+  }
+  .station .st-pin > span{transform:rotate(45deg)}
+  .station.cur .st-pin{transform:rotate(-45deg) scale(1.12);animation:stnPulse 1.4s ease-in-out infinite}
+  @keyframes stnPulse{0%,100%{box-shadow:0 10px 0 rgba(0,0,0,.14),0 16px 22px rgba(0,0,0,.22),0 0 0 0 rgba(255,211,107,.7)}50%{box-shadow:0 10px 0 rgba(0,0,0,.14),0 16px 22px rgba(0,0,0,.22),0 0 0 16px rgba(255,211,107,0)}}
+  .station.done .st-pin{filter:saturate(.7) brightness(1.04)}
+  .station.done .st-pin::after{content:'✓';position:absolute;bottom:-6px;right:-6px;transform:rotate(45deg);background:#6FBE7D;color:#fff;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;border:2px solid #fff;box-shadow:0 2px 5px rgba(0,0,0,.2)}
+  .station .st-label{
+    margin-top:14px;font-weight:700;font-size:.82rem;color:var(--ink);
+    background:rgba(255,255,255,.85);border-radius:12px;padding:3px 8px;display:inline-block;
+    box-shadow:0 3px 8px rgba(0,0,0,.1);line-height:1.25;
+  }
+  .station .st-num{
+    position:absolute;top:-10px;left:50%;transform:translateX(-50%);
+    background:var(--ink);color:#fff;font-size:.72rem;font-weight:800;
+    width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    border:2px solid #fff;z-index:3;
+  }
+
+  .player-token{
+    position:absolute;font-size:2.4rem;z-index:6;transform:translate(-50%,-110%);
+    transition:top 1s cubic-bezier(.34,1.3,.5,1),left 1s cubic-bezier(.34,1.3,.5,1);
+    filter:drop-shadow(0 6px 5px rgba(0,0,0,.35));pointer-events:none;
+  }
+  .player-token.hop{animation:tokHop .9s ease}
+  @keyframes tokHop{0%{transform:translate(-50%,-110%) scale(1)}45%{transform:translate(-50%,-200%) scale(1.25) rotate(-8deg)}100%{transform:translate(-50%,-110%) scale(1)}}
+
+  /* station banner */
+  .station-banner{
+    display:flex;align-items:center;gap:16px;justify-content:center;
+    background:var(--white);border-radius:20px;padding:14px 26px;margin:0 auto 18px;max-width:520px;
+    box-shadow:0 10px 26px var(--shadow);border-top:5px solid var(--accent);
+  }
+  .station-banner .sb-emoji{font-size:2.4rem}
+  .station-banner .sb-text{display:flex;flex-direction:column;text-align:right}
+  .station-banner .sb-num{font-family:'Heebo',sans-serif;font-weight:700;letter-spacing:1px;color:var(--accent-deep);font-size:.8rem}
+  .station-banner .sb-name{font-family:'Frank Ruhl Libre',serif;font-weight:700;font-size:1.4rem;color:var(--ink)}
+
+  /* question card */
+  .question-card{
+    background:var(--white);border-radius:26px;padding:38px 40px;
+    box-shadow:0 18px 40px var(--shadow);text-align:center;
+    border:none;border-top:6px solid var(--accent);position:relative;
+  }
+  .q-text{font-family:'Frank Ruhl Libre',serif;font-size:1.7rem;line-height:1.45;color:var(--ink);min-height:70px;display:flex;align-items:center;justify-content:center}
+  .q-hint{
+    background:var(--cream);border-radius:16px;padding:0 22px;margin:0 auto;max-width:560px;
+    max-height:0;overflow:hidden;transition:.4s;color:var(--ink-soft);font-size:1.05rem;
+  }
+  .q-hint.show{max-height:220px;padding:18px 22px;margin-top:18px}
+
+  /* DICE */
+  .dice-zone{height:130px;display:flex;align-items:center;justify-content:center;margin:24px 0 6px;perspective:600px}
+  .dice{width:78px;height:78px;position:relative;transform-style:preserve-3d;transition:transform 1.1s cubic-bezier(.3,.9,.4,1.1);transform:rotateX(-20deg) rotateY(20deg)}
+  .dice.rolling{animation:rollSpin 1.05s ease-out}
+  @keyframes rollSpin{0%{transform:rotateX(0) rotateY(0)}100%{transform:rotateX(720deg) rotateY(1080deg)}}
+  .dice .face{position:absolute;width:78px;height:78px;background:linear-gradient(150deg,#fff,#ffe9c7);border-radius:16px;border:2px solid #f0d6a8;display:grid;padding:12px;gap:4px;box-shadow:inset 0 0 12px rgba(201,130,31,.15)}
+  .dice .face span{width:14px;height:14px;border-radius:50%;align-self:center;justify-self:center;background:radial-gradient(circle at 35% 30%,#F4A93C,#C9821F);box-shadow:0 1px 2px rgba(0,0,0,.25)}
+  .f1{transform:translateZ(39px);grid-template-areas:'. . .' '. a .' '. . .'}
+  .f1 span{grid-area:a}
+  .f2{transform:rotateY(180deg) translateZ(39px);grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr)}
+  .f2 span:nth-child(1){grid-column:1;grid-row:1}.f2 span:nth-child(2){grid-column:3;grid-row:3}
+  .f3{transform:rotateY(90deg) translateZ(39px);grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr)}
+  .f3 span:nth-child(1){grid-column:1;grid-row:1}.f3 span:nth-child(2){grid-column:2;grid-row:2}.f3 span:nth-child(3){grid-column:3;grid-row:3}
+  .f4{transform:rotateY(-90deg) translateZ(39px);grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr)}
+  .f4 span:nth-child(1){grid-column:1;grid-row:1}.f4 span:nth-child(2){grid-column:3;grid-row:1}.f4 span:nth-child(3){grid-column:1;grid-row:3}.f4 span:nth-child(4){grid-column:3;grid-row:3}
+  .f5{transform:rotateX(90deg) translateZ(39px);grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr)}
+  .f5 span:nth-child(1){grid-column:1;grid-row:1}.f5 span:nth-child(2){grid-column:3;grid-row:1}.f5 span:nth-child(3){grid-column:2;grid-row:2}.f5 span:nth-child(4){grid-column:1;grid-row:3}.f5 span:nth-child(5){grid-column:3;grid-row:3}
+  .f6{transform:rotateX(-90deg) translateZ(39px);grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(3,1fr)}
+
+  .btn-roll{font-size:1.1rem;padding:15px 34px;box-shadow:0 8px 0 var(--accent-deep),0 14px 22px rgba(176,123,79,.4)}
+  .btn-roll:hover{transform:translateY(-2px)}
+  .btn-roll:active{transform:translateY(6px);box-shadow:0 3px 0 var(--accent-deep)}
+  .btn-roll:disabled{opacity:.55;cursor:not-allowed;transform:none}
+  .q-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+
+  /* confetti */
+  .confetti{position:fixed;top:-20px;width:12px;height:12px;z-index:9999;border-radius:2px;pointer-events:none;animation:fall linear forwards}
+  @keyframes fall{to{transform:translateY(105vh) rotate(720deg);opacity:.9}}
+
+  .win-screen{text-align:center;background:var(--white);border-radius:26px;padding:56px 40px;box-shadow:0 18px 40px var(--shadow);margin-top:10px}
+  .win-emoji{font-size:4.5rem;margin-bottom:16px;animation:tokHop 1.6s ease-in-out infinite}
+  .win-screen h3{font-family:'Frank Ruhl Libre',serif;font-size:2.1rem;color:var(--accent-deep);margin-bottom:12px}
+  .win-screen p{color:var(--ink-soft);margin-bottom:26px;font-size:1.1rem}
+  .win-screen .btn{margin:0 6px}
+
+  .game-note{
+    max-width:760px;margin:40px auto 0;text-align:center;background:var(--cream-deep);
+    padding:22px 28px;border-radius:18px;color:var(--ink-soft);font-size:1.02rem;line-height:1.6;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:900px){
+    .level-cards{grid-template-columns:1fr}
+    .q-text{font-size:1.4rem}
+    .hero{grid-template-columns:1fr;text-align:center;min-height:auto;padding-top:30px}
+    .hero-actions{justify-content:center}
+    .hero p.intro{margin-inline:auto}
+    .hero-visual{order:-1;margin-bottom:20px}
+    .about-grid,.book-wrap,.contact-grid{grid-template-columns:1fr;gap:36px}
+    .workshop-feature{grid-template-columns:1fr}
+    .cards{grid-template-columns:1fr}
+    .moments-grid{grid-template-columns:repeat(3,1fr)}
+    nav{position:fixed;top:70px;right:0;left:0;background:var(--cream);flex-direction:column;
+        max-height:0;overflow:hidden;transition:max-height .4s;border-bottom:1px solid rgba(201,149,107,.22)}
+    nav.open{max-height:520px}
+    nav ul{flex-direction:column;padding:16px;gap:4px}
+    nav a{display:block;padding:12px}
+    .burger{display:flex}
+    .burger.x span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+    .burger.x span:nth-child(2){opacity:0}
+    .burger.x span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+  }
+  @media(max-width:560px){
+    .moments-grid{grid-template-columns:repeat(2,1fr)}
+    h2.section-title{font-size:2rem}
+    section{padding:48px 22px}
+    .board3d{grid-template-columns:repeat(5,1fr);gap:7px;padding:18px 14px;transform:rotateX(26deg)}
+    .tile3d{font-size:.82rem}
+    .question-card{padding:30px 22px}
+    .q-text{font-size:1.3rem}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <div class="logo" onclick="go('home')">עדי <span>פלדמן</span></div>
+    <button class="burger" id="burger" aria-label="תפריט"><span></span><span></span><span></span></button>
+    <nav id="nav">
+      <ul>
+        <li><a data-page="home" onclick="go('home')" class="active">בית</a></li>
+        <li><a data-page="about" onclick="go('about')">נעים להכיר</a></li>
+        <li><a data-page="clinic" onclick="go('clinic')">קלינאית תקשורת</a></li>
+        <li><a data-page="parenting" onclick="go('parenting')">הדרכת הורים</a></li>
+        <li><a data-page="moments" onclick="go('moments')">שפה בכל רגע</a></li>
+        <li><a data-page="workshops" onclick="go('workshops')">סדנאות</a></li>
+        <li><a data-page="game" onclick="go('game')">רכבת הפלאים</a></li>
+        <li><a data-page="book" onclick="go('book')">הספר שלי</a></li>
+        <li><a data-page="contact" onclick="go('contact')">יצירת קשר</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ HOME ============ -->
+  <div class="page active" id="home">
+    <div class="hero">
+      <div class="hero-text">
+        <div class="eyebrow">נעים להכיר</div>
+        <h1>שפה מתחילה<em>בקשר</em></h1>
+        <div class="sub">קלינאית תקשורת ומדריכת הורים בגישה ההיקשרותית</div>
+        <p class="intro">תמיד האמנתי שהקשרים הכי עמוקים ומשמעותיים שלנו מתחילים במקומות הכי פשוטים — במילים שאנחנו בוחרים, במבט בעיניים, ברגעים הקטנים של הביחד בבית.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" onclick="go('contact')">לקביעת פגישה</a>
+          <a class="btn btn-ghost" onclick="go('moments')">שפה בכל רגע</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="blob">
+          <span class="initials">ע״פ</span>
+          <div class="floating-tag tag-1"><span class="dot"></span>גישה היקשרותית</div>
+          <div class="floating-tag tag-2"><span class="dot"></span>חיבור וקרבה</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ ABOUT ============ -->
+  <div class="page" id="about">
+    <section>
+      <div class="eyebrow">נעים להכיר</div>
+      <h2 class="section-title">אני עדי</h2>
+      <div class="about-grid" style="margin-top:40px">
+        <div class="about-img">עדי פלדמן</div>
+        <div class="about-text">
+          <p>אני עדי, בת 34, גרה בכרכור, בת הזוג של אלכס ואמא של אלמה.</p>
+          <p>כקלינאית תקשורת ומדריכת הורים בגישה ההיקשרותית, הלב של העבודה שלי הוא לא רק "לטפל" בקושי, אלא להקשיב למה שקורה מתחת לפני השטח. אני מאמינה ששפה, רגש והקשר שבין הורה לילד שזורים זה בזה.</p>
+          <p>בקליניקה שלי, ובכל מה שאני יוצרת, המטרה היא לתת לכם — ההורים — את הכלים המקצועיים, אבל לא פחות חשוב מכך, את השקט והביטחון לסמוך על האינטואיציה שלכם ולהוביל את הילדים שלכם מתוך חיבור אמיתי וקרבה.</p>
+          <div class="quote-card">כשההורה מרגיש בטוח, והילד מרגיש מובן ועטוף — שם קורה הקסם האמיתי, ושם נפתחת הדלת להתפתחות טבעית, בריאה ומלאת ביטחון.</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ CLINIC ============ -->
+  <div class="page" id="clinic">
+    <section>
+      <div class="eyebrow">תחום מקצועי</div>
+      <h2 class="section-title">קלינאית תקשורת</h2>
+      <p class="lead">אבחון, טיפול וליווי בהתפתחות השפה והתקשורת — מתוך הקשבה עמוקה למה שקורה מתחת לפני השטח, ולא רק לסימפטום.</p>
+      <div class="cards">
+        <div class="card">
+          <div class="ico">🗣️</div>
+          <h3>התפתחות שפה ודיבור</h3>
+          <p>ליווי ילדים בהתפתחות אוצר מילים, הגייה, משפטים ויכולת ההבעה — בקצב הטבעי שלהם.</p>
+        </div>
+        <div class="card">
+          <div class="ico">👂</div>
+          <h3>תקשורת והבנה</h3>
+          <p>חיזוק היכולת להבין, להקשיב ולהתחבר — הבסיס לכל אינטראקציה משמעותית.</p>
+        </div>
+        <div class="card">
+          <div class="ico">🧩</div>
+          <h3>אבחון מותאם</h3>
+          <p>הסתכלות רחבה על הילד ועל הקשר המשפחתי, ובניית תכנית התערבות אישית ומדויקת.</p>
+        </div>
+        <div class="card">
+          <div class="ico">🌱</div>
+          <h3>התפתחות בריאה</h3>
+          <p>יצירת תנאים שבהם הילד מרגיש בטוח ומובן — ומשם נפתחת הדלת להתפתחות טבעית.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ PARENTING ============ -->
+  <div class="page" id="parenting">
+    <section>
+      <div class="eyebrow">הדרכה וליווי</div>
+      <h2 class="section-title">הדרכת הורים</h2>
+      <p class="lead">בגישה ההיקשרותית — כי כשההורה מרגיש בטוח, גם הילד מרגיש מובן ועטוף. אני כאן כדי ללוות אתכם, צעד אחר צעד, בשפה וברגש.</p>
+      <div class="about-grid" style="margin-top:46px">
+        <div class="about-text">
+          <p>הרבה הורים מגיעים אליי עם תחושה שהם "צריכים לעשות משהו" כדי לקדם את הילד. האמת הרבה יותר פשוטה ומרגיעה — הכוח כבר נמצא בידיים שלכם, בתוך הקשר היומיומי.</p>
+          <p>בהדרכה אנחנו לא רק פותרים קושי נקודתי. אנחנו מחזקים את הקשב שלכם, את הביטחון לסמוך על האינטואיציה, ואת היכולת להוביל את הילד מתוך חיבור אמיתי.</p>
+          <div class="quote-card">המטרה היא לתת לכם את הכלים המקצועיים — אבל לא פחות חשוב, את השקט לסמוך על עצמכם.</div>
+        </div>
+        <div class="cards" style="grid-template-columns:1fr;margin-top:0">
+          <div class="card">
+            <div class="ico">💛</div>
+            <h3>קשר לפני הכל</h3>
+            <p>שפה, רגש וקשר שזורים זה בזה. אנחנו מתחילים מהחיבור.</p>
+          </div>
+          <div class="card">
+            <div class="ico">🏡</div>
+            <h3>מתוך הבית</h3>
+            <p>כלים שמשתלבים בשגרה שלכם, בלי להוסיף עומס ללו"ז.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ MOMENTS (signature) ============ -->
+  <div class="page" id="moments">
+    <section>
+      <div class="moments-intro">
+        <div class="eyebrow" style="text-align:center">הרעיון שמאחורי הכל</div>
+        <h2 class="section-title">שפה בכל רגע</h2>
+        <p class="lead" style="margin-inline:auto">כל רגע ביום הוא הזדמנות. השפה לא מחכה לשעה מיוחדת — היא נמצאת שם כשנועלים נעליים בבוקר, חופפים את הראש במקלחת או נוסעים באוטו. דווקא הרגעים הפשוטים הם המגרש הביתי שבו הילדים לומדים הכי טוב.</p>
+        <p style="margin-top:18px;font-weight:600;color:var(--accent-deep)">לחצו על הרגעים וגלו רעיונות קטנים ופשוטים ליישום כבר היום ↓</p>
+      </div>
+      <div class="moments-grid" id="momentsGrid"></div>
+      <div class="moment-detail" id="momentDetail"></div>
+    </section>
+  </div>
+
+  <!-- ============ WORKSHOPS ============ -->
+  <div class="page" id="workshops">
+    <section>
+      <div class="eyebrow">לומדים יחד</div>
+      <h2 class="section-title">סדנאות</h2>
+      <p class="lead">מפגשים חמים ומעשירים להורים, על שפה, התפתחות ותקשורת — עם כלים שאפשר ליישם כבר באותו ערב.</p>
+      <div class="workshop-feature">
+        <div class="workshop-visual">
+          <span class="badge">סדנה פעילה</span>
+          <h3>סדנת מלמולים</h3>
+          <p>הצעדים הראשונים בעולם השפה — איך מזהים, מעודדים ונהנים מהמלמולים הראשונים של התינוק, מתוך חיבור ושמחה.</p>
+        </div>
+        <div class="workshop-body">
+          <h3 style="font-family:'Frank Ruhl Libre',serif;font-size:1.5rem;margin-bottom:6px">מה נלמד בסדנה</h3>
+          <ul>
+            <li>איך מתפתחת השפה בשנה הראשונה ומה תפקיד המלמולים</li>
+            <li>רגעים יומיומיים שהופכים להזדמנויות לתקשורת</li>
+            <li>כלים פשוטים לעידוד דיבור מתוך קרבה ולא מתוך "עבודה"</li>
+            <li>איך לסמוך על האינטואיציה ההורית שלכם</li>
+          </ul>
+          <a class="btn btn-primary" onclick="go('contact')">לפרטים והרשמה</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ GAME ============ -->
+  <div class="page" id="game">
+    <section>
+      <div class="eyebrow" style="text-align:center">משחק חשיבה ושפה</div>
+      <h2 class="section-title" style="text-align:center">רכבת הפלאים</h2>
+      <p class="lead" style="margin:18px auto 0;text-align:center">מסע מסביב לעולם ב-20 תחנות קסומות. בחרו דמות ורמת גיל, גלגלו את הקובייה, וצאו להרפתקה — בכל תחנה שאלת חשיבה חדשה. בלי הרשמה, פשוט משחקים.</p>
+
+      <!-- setup -->
+      <div id="gameSetup" class="game-setup">
+        <h3 class="game-h3">1 · בחרו דמות</h3>
+        <div class="char-picker" id="charPicker">
+          <button class="char-card" data-char="🦊" data-name="שועלי"><span class="char-face">🦊</span><span class="char-name">שועלי</span></button>
+          <button class="char-card" data-char="🐰" data-name="ארנבון"><span class="char-face">🐰</span><span class="char-name">ארנבון</span></button>
+          <button class="char-card" data-char="🦉" data-name="ינשופי"><span class="char-face">🦉</span><span class="char-name">ינשופי</span></button>
+          <button class="char-card" data-char="🐻" data-name="דובוני"><span class="char-face">🐻</span><span class="char-name">דובוני</span></button>
+        </div>
+
+        <h3 class="game-h3" style="margin-top:44px">2 · בחרו רמת גיל</h3>
+        <div class="level-cards">
+          <button class="level-card lc-1" data-level="1">
+            <span class="lvl-emoji">🌱</span>
+            <span class="lvl-title">רמה 1</span>
+            <span class="lvl-age">גילאי 4–6</span>
+            <span class="lvl-desc">שאלות "למה" מהעולם הקרוב והמוכר</span>
+          </button>
+          <button class="level-card lc-2" data-level="2">
+            <span class="lvl-emoji">🌿</span>
+            <span class="lvl-title">רמה 2</span>
+            <span class="lvl-age">גילאי 7–9</span>
+            <span class="lvl-desc">חוקים, סיבה ותוצאה, והעולם הרחב</span>
+          </button>
+          <button class="level-card lc-3" data-level="3">
+            <span class="lvl-emoji">🌳</span>
+            <span class="lvl-title">רמה 3</span>
+            <span class="lvl-age">גילאי 10–12</span>
+            <span class="lvl-desc">חשיבה מורכבת, "מה היה קורה אילו", וטיעון</span>
+          </button>
+        </div>
+        <p class="setup-hint" id="setupHint">בחרו דמות ורמה כדי להתחיל את ההרפתקה ✨</p>
+      </div>
+
+      <!-- board -->
+      <div id="gameBoard" class="game-board-wrap" style="display:none">
+        <div class="game-topbar">
+          <button class="btn btn-ghost btn-sm" onclick="resetGame()">↩ מסך פתיחה</button>
+          <div class="progress-pill">תחנה <span id="curStation">0</span> / 20</div>
+          <div class="lvl-pill" id="lvlPill">רמה 1 · גילאי 4–6</div>
+        </div>
+
+        <!-- winding map scene -->
+        <div class="map-viewport" id="mapViewport">
+          <div class="map-world" id="mapWorld">
+            <svg class="map-rail" id="mapRail" viewBox="0 0 1000 1700" preserveAspectRatio="xMidYMin meet"></svg>
+            <div class="stations-layer" id="stationsLayer"></div>
+            <div class="player-token" id="playerToken">🦊</div>
+          </div>
+        </div>
+
+        <div class="game-main">
+          <div class="station-banner" id="stationBanner">
+            <span class="sb-emoji" id="sbEmoji">🏡</span>
+            <div class="sb-text"><span class="sb-num" id="sbNum">תחנה 1</span><span class="sb-name" id="sbName">תחנת הזינוק</span></div>
+          </div>
+
+          <div class="question-card" id="questionCard">
+            <p class="q-text" id="qText">גלגלו את הקובייה כדי לצאת לדרך!</p>
+            <div class="q-hint" id="qHint"></div>
+
+            <!-- DICE -->
+            <div class="dice-zone" id="diceZone">
+              <div class="dice" id="dice">
+                <div class="face f1"><span></span></div>
+                <div class="face f2"><span></span><span></span></div>
+                <div class="face f3"><span></span><span></span><span></span></div>
+                <div class="face f4"><span></span><span></span><span></span><span></span></div>
+                <div class="face f5"><span></span><span></span><span></span><span></span><span></span></div>
+                <div class="face f6"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+              </div>
+            </div>
+
+            <div class="q-actions">
+              <button class="btn btn-ghost btn-sm" id="hintBtn" onclick="toggleHint()" style="display:none">💡 רמז לדיון</button>
+              <button class="btn btn-primary btn-roll" id="rollBtn" onclick="rollDice()">🎲 גלגלו את הקובייה</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="winScreen" class="win-screen" style="display:none">
+          <div class="win-emoji">🏆</div>
+          <h3>כל הכבוד! הגעתם לארמון הסיום!</h3>
+          <p>סיימתם מסע מלא חשיבה דרך כל 20 התחנות. אפשר לצאת להרפתקה חדשה.</p>
+          <button class="btn btn-primary" onclick="restartSameLevel()">סיבוב נוסף 🔄</button>
+          <button class="btn btn-ghost" onclick="resetGame()">מסע אחר</button>
+        </div>
+      </div>
+
+      <p class="game-note">💛 טיפ להורים ולמטפלים: אין תשובה אחת נכונה. המטרה היא לעודד את הילד לחשוב בקול, להסביר ולנמק. אפשר להיעזר ברמז לדיון כדי להעמיק את השיחה.</p>
+    </section>
+  </div>
+
+  <!-- ============ BOOK ============ -->
+  <div class="page" id="book">
+    <section>
+      <div class="eyebrow">הספר שלי</div>
+      <h2 class="section-title">איפה מתחבאות הנשיקות?</h2>
+      <div class="book-wrap" style="margin-top:40px">
+        <div class="book-cover">
+          <div class="heart">💋</div>
+          <h3>איפה מתחבאות הנשיקות?</h3>
+          <div class="author">מאת עדי פלדמן</div>
+        </div>
+        <div class="about-text">
+          <p>ספר ילדים רך ומלא חום, שנולד מתוך אותה אמונה שמלווה את כל העבודה שלי — שהקשרים הכי עמוקים מתחילים ברגעים הקטנים והפשוטים של הביחד.</p>
+          <p>סיפור שמזמין הורים וילדים לרגע משותף של קרבה, חיבוק ומילים — חוויה שמחזקת את הקשר וגם את השפה, בלי מאמץ, מתוך אהבה.</p>
+          <div class="hero-actions" style="margin-top:26px">
+            <a class="btn btn-primary" onclick="go('contact')">לרכישת הספר</a>
+            <a class="btn btn-ghost" onclick="go('about')">על עדי</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ CONTACT ============ -->
+  <div class="page" id="contact">
+    <section>
+      <div class="eyebrow">נשמח לשמוע ממך</div>
+      <h2 class="section-title">יצירת קשר</h2>
+      <p class="lead">לכל שאלה, קביעת פגישה או פרטים על הסדנאות — אני כאן. מלאו את הפרטים ואחזור אליכם בהקדם.</p>
+      <div class="contact-grid" style="margin-top:44px">
+        <div class="contact-info">
+          <div class="contact-line"><span class="c-ico">📍</span><div><strong>קליניקה</strong><br>כרכור והסביבה</div></div>
+          <div class="contact-line"><span class="c-ico">📞</span><div><strong>טלפון</strong><br>הזינו פרטים ואחזור אליכם</div></div>
+          <div class="contact-line"><span class="c-ico">✉️</span><div><strong>אימייל</strong><br>דרך הטופס לצד</div></div>
+          <div class="quote-card" style="margin-top:30px">אני כאן כדי ללוות אתכם, צעד אחר צעד, בשפה וברגש.</div>
+        </div>
+        <form onsubmit="return submitForm(event)">
+          <div class="field">
+            <label for="name">שם מלא</label>
+            <input type="text" id="name" required placeholder="איך קוראים לך?">
+          </div>
+          <div class="field">
+            <label for="phone">טלפון</label>
+            <input type="tel" id="phone" required placeholder="מספר ליצירת קשר">
+          </div>
+          <div class="field">
+            <label for="message">הודעה</label>
+            <textarea id="message" placeholder="במה אפשר לעזור?"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%">שליחה</button>
+          <div class="form-msg" id="formMsg">תודה! ההודעה נשלחה, אחזור אליך בהקדם 💛</div>
+        </form>
+      </div>
+    </section>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="logo">עדי <span>פלדמן</span></div>
+      <p>קלינאית תקשורת ומדריכת הורים<br>בגישה ההיקשרותית</p>
+    </div>
+    <div class="footer-links">
+      <a onclick="go('about')">נעים להכיר</a>
+      <a onclick="go('clinic')">קלינאית תקשורת</a>
+      <a onclick="go('parenting')">הדרכת הורים</a>
+      <a onclick="go('moments')">שפה בכל רגע</a>
+      <a onclick="go('workshops')">סדנאות</a>
+      <a onclick="go('game')">רכבת הפלאים</a>
+      <a onclick="go('book')">הספר שלי</a>
+      <a onclick="go('contact')">יצירת קשר</a>
+    </div>
+  </div>
+  <div class="copyright">© עדי פלדמן · כל הזכויות שמורות · נבנה באהבה</div>
+</footer>
+
+<script>
+  /* ---- moments data ---- */
+  const moments = [
+    {key:'bath', emoji:'🛁', label:'אמבטיה', tips:[
+      'שימוש בפעלים ספציפיים: להתפשט, לחלוץ, ללבוש, להתקלח, לשטוף, לסבן, לחפוף.',
+      'העשרת השיח בתארים והפכים: נקי מול מלוכלך, רטוב מול יבש, חם, פושר, קר.',
+      'המשגת קטגוריות וחלקי גוף: "כלי רחצה", ברכיים, כתפיים, מרפק, כף יד וכף רגל.'
+    ]},
+    {key:'kitchen', emoji:'🍳', label:'מטבח', tips:[
+      'מנו יחד מרכיבים ופעולות: לחתוך, לערבב, לטעום, למזוג.',
+      'דברו על מרקמים וטעמים: חלק, גס, מתוק, חמוץ, חם, קר.',
+      'בקשו עזרה קטנה ותנו הוראות — הזדמנות נהדרת להבנת שפה.'
+    ]},
+    {key:'drive', emoji:'🚗', label:'נסיעה', tips:[
+      'תארו מה רואים בחוץ: רכבים, צבעים, בעלי חיים, מבנים.',
+      'שירו שירים מוכרים והשלימו מילים יחד.',
+      'שחקו ב"מי רואה..." לחיזוק אוצר מילים וקשב.'
+    ]},
+    {key:'getready', emoji:'👕', label:'התארגנות', tips:[
+      'תארו את סדר הפעולות: קודם, אחר כך, בסוף.',
+      'מנו פריטי לבוש וחלקי גוף תוך כדי הלבשה.',
+      'תנו בחירה: "החולצה הכחולה או הירוקה?" לעידוד הבעה.'
+    ]},
+    {key:'trips', emoji:'🌳', label:'טיולים', tips:[
+      'תייגו את מה שפוגשים בטבע: עץ, פרח, אבן, ציפור.',
+      'דברו על תחושות: חם, קריר, רך, מחוספס.',
+      'ספרו סיפור קטן על ההרפתקה תוך כדי הליכה.'
+    ]},
+    {key:'tidy', emoji:'🧺', label:'סידור הבית', tips:[
+      'מיינו לפי קטגוריות: צעצועים, ספרים, בגדים.',
+      'השתמשו במילות מיקום: בתוך, על, מתחת, ליד.',
+      'הפכו את הסידור למשחק עם הוראות פשוטות.'
+    ]},
+    {key:'sleep', emoji:'🌙', label:'שינה', tips:[
+      'סכמו יחד את היום: "מה עשינו היום?"',
+      'דברו ברוגע על רגשות שעלו במהלך היום.',
+      'שגרה קבועה של מילים מרגיעות לפני השינה.'
+    ]},
+    {key:'story', emoji:'📖', label:'סיפור', tips:[
+      'עצרו ושאלו "מה את חושבת שיקרה עכשיו?"',
+      'הצביעו על תמונות ותייגו אותן יחד.',
+      'חברו את הסיפור לחיים: "גם לנו יש את זה בבית!"'
+    ]},
+    {key:'art', emoji:'🎨', label:'יצירה', tips:[
+      'תארו צבעים, צורות וגדלים תוך כדי יצירה.',
+      'השתמשו בפעלים: לגזור, להדביק, לצבוע, לקפל.',
+      'תנו לילד לספר על מה שיצר — בלי לתקן.'
+    ]},
+    {key:'garden', emoji:'🌻', label:'גינה', tips:[
+      'מנו צמחים, חרקים וכלי גינון.',
+      'דברו על תהליך: לזרוע, להשקות, לצמוח.',
+      'תארו תחושות מהאדמה, העלים והפרחים.'
+    ]},
+    {key:'shopping', emoji:'🛒', label:'קניות', tips:[
+      'הכינו יחד רשימה ותייגו מוצרים.',
+      'דברו על כמויות: הרבה, מעט, אחד, עוד.',
+      'בקשו מהילד לאתר פריט — חיזוק הבנה וקשב.'
+    ]},
+    {key:'home', emoji:'🏠', label:'בית', tips:[
+      'כל פינה בבית היא הזדמנות לשיחה ולמשחק.',
+      'שלבו שפה בפעולות הכי שגרתיות שביום.',
+      'הקשיבו, הגיבו, וחזרו על מה שהילד אומר.'
+    ]}
+  ];
+
+  const grid = document.getElementById('momentsGrid');
+  const detail = document.getElementById('momentDetail');
+  if(grid){
+    moments.forEach(m=>{
+      const el=document.createElement('div');
+      el.className='moment';
+      el.innerHTML=`<span class="m-emoji">${m.emoji}</span><span class="m-label">${m.label}</span>`;
+      el.addEventListener('click',(e)=>{
+        const r=document.createElement('span');r.className='ripple';
+        const size=Math.max(el.clientWidth,el.clientHeight);
+        r.style.width=r.style.height=size+'px';
+        r.style.left=(e.offsetX-size/2)+'px';r.style.top=(e.offsetY-size/2)+'px';
+        el.appendChild(r);setTimeout(()=>r.remove(),600);
+        detail.innerHTML=`<h3>${m.emoji} ${m.label}</h3>`+m.tips.map(t=>`<p>• ${t}</p>`).join('');
+        detail.classList.add('open');
+        detail.scrollIntoView({behavior:'smooth',block:'center'});
+      });
+      grid.appendChild(el);
+    });
+  }
+
+  /* ================= GAME ================= */
+  const QUESTIONS = {
+    1: [ // גילאי 4-6
+      {q:"למה אנחנו מצחצחים שיניים?", h:"חשבו מה קורה לשיניים אם לא מנקים אותן."},
+      {q:"למה אנחנו נועלים נעליים?", h:"מה מרגישים כשהולכים יחפים בחוץ?"},
+      {q:"למה אנשים פותחים מטרייה כשיורד גשם?", h:"מה היה קורה בלי המטרייה?"},
+      {q:"למה אנחנו צריכים לישון בלילה?", h:"איך מרגישים כשעייפים מאוד?"},
+      {q:"למה אנחנו אוכלים פירות וירקות?", h:"מה הם נותנים לגוף שלנו?"},
+      {q:"למה חובשים קסדה ברכיבה על אופניים?", h:"מה הקסדה מגינה עליו?"},
+      {q:"למה לחיות יש זנב?", h:"חשבו על חתול או כלב — מה הם עושים עם הזנב?"},
+      {q:"למה אנחנו חוגגים ימי הולדת?", h:"מה אנחנו מציינים ביום הזה?"},
+      {q:"למה אנחנו שמים כרית כשישנים?", h:"איך זה מרגיש בלי כרית?"},
+      {q:"למה אנחנו צריכים לשתות מים?", h:"מה קורה לגוף כשצמאים?"},
+      {q:"למה ציפורים עפות?", h:"איך זה עוזר להן למצוא אוכל או לברוח?"},
+      {q:"למה אנחנו הולכים לגן או לבית הספר?", h:"מה לומדים שם?"},
+      {q:"למה אנחנו שוטפים ידיים?", h:"מה מסתתר על הידיים שאי אפשר לראות?"},
+      {q:"למה צריך לשמור על שקט בספרייה?", h:"מה אנשים עושים שם?"},
+      {q:"למה לובשים מעיל בחורף?", h:"איך המעיל עוזר לנו?"},
+      {q:"למה מורחים קרם הגנה בים?", h:"ממה הקרם שומר על העור?"},
+      {q:"למה לאנשים יש חיות מחמד?", h:"מה כיף בלגדל חיה?"},
+      {q:"למה יש עונות שונות בשנה?", h:"מה משתנה בין קיץ לחורף?"},
+      {q:"למה אנשים שותלים עצים?", h:"מה עצים נותנים לנו?"},
+      {q:"למה אנחנו צריכים תמרורים בכביש?", h:"מה היה קורה בלעדיהם?"},
+      {q:"למה שמים אוכל במקרר?", h:"מה קורה לאוכל שנשאר בחוץ?"},
+      {q:"למה משתמשים בסבון באמבטיה?", h:"מה הסבון מנקה?"},
+      {q:"למה צריך לחכות לאור הירוק לפני שחוצים?", h:"מה האור האדום אומר לנו?"},
+      {q:"למה לובשים בגדים שונים לאירועים שונים?", h:"מה לובשים למסיבה ומה לשינה?"},
+      {q:"למה יש חיות שחיות במים?", h:"איך הן נושמות ושוחות שם?"},
+      {q:"למה מפעילים מאוורר או מזגן בקיץ?", h:"איך זה עוזר כשחם מאוד?"},
+      {q:"למה אנחנו לובשים בגדים?", h:"ממה הבגדים שומרים עלינו?"},
+      {q:"למה אנשים מגדלים פרחים בגינה?", h:"מה יפה או טוב בפרחים?"},
+      {q:"למה צריך לזרוק זבל לפח?", h:"מה היה קורה אם כולם זרקו על הרצפה?"},
+      {q:"למה אנחנו צריכים שעונים?", h:"איך יודעים מתי הזמן לעשות דברים?"}
+    ],
+    2: [ // גילאי 7-9
+      {q:"למה אנשים ממחזרים?", h:"מה קורה לאשפה שאפשר להשתמש בה שוב?"},
+      {q:"למה אנחנו צריכים לעקוב אחרי כללים?", h:"מה היה קורה אם לכל אחד היו כללים אחרים?"},
+      {q:"מה היה קורה אם לא היו בתי ספר?", h:"איך ילדים היו לומדים דברים?"},
+      {q:"למה אנחנו צריכים רופאים ובתי חולים?", h:"מי עוזר לנו כשחולים?"},
+      {q:"למה יש שפות שונות בעולם?", h:"איך זה קשור למקומות שבהם אנשים גרים?"},
+      {q:"למה יש אזורי זמן שונים בעולם?", h:"חשבו על השמש — היא זורחת בכל מקום באותו רגע?"},
+      {q:"למה אנשים מתעמלים?", h:"מה זה עושה לגוף ולבריאות?"},
+      {q:"למה יש חיות שנכנסות לתרדמת חורף?", h:"מה קשה למצוא בחורף?"},
+      {q:"מה היה קורה אם לא היו עצים?", h:"חשבו על אוויר, צל ובעלי חיים."},
+      {q:"למה אנשים משתמשים בכסף כדי לקנות דברים?", h:"איך היה אפשר אחרת לקבל מה שצריך?"},
+      {q:"למה אנחנו צריכים כבאים?", h:"מתי קוראים להם?"},
+      {q:"למה יש פנסי רחוב?", h:"מה הם עוזרים לנו לעשות בלילה?"},
+      {q:"למה יש חיות שנודדות ממקום למקום?", h:"מה הן מחפשות במקום אחר?"},
+      {q:"למה חשוב לחסוך בחשמל?", h:"מאיפה החשמל מגיע ומה זה עולה?"},
+      {q:"למה יש לנו סופי שבוע?", h:"למה טוב לנוח אחרי כמה ימים?"},
+      {q:"מה היה קורה אם לא היו דבורים?", h:"חשבו איך פרחים ופירות גדלים."},
+      {q:"למה יש חוקים?", h:"איך הם שומרים על כולנו?"},
+      {q:"למה אנשים משתמשים במפה או בניווט כשנוסעים?", h:"איך מוצאים את הדרך למקום חדש?"},
+      {q:"למה יש אנשים שמרכיבים משקפיים?", h:"במה המשקפיים עוזרים?"},
+      {q:"למה אנחנו צריכים חקלאים?", h:"מאיפה מגיע האוכל שלנו?"},
+      {q:"למה חשוב להגן על חיות בסכנת הכחדה?", h:"מה קורה כשמין חיה נעלם לגמרי?"},
+      {q:"למה אנשים משתמשים בתחבורה ציבורית?", h:"מה היתרון על פני נסיעה לבד?"},
+      {q:"למה יש סוגים שונים של בתים?", h:"איך אקלים ומקום משפיעים על זה?"},
+      {q:"למה חשוב לשמור על הסביבה?", h:"איך זה משפיע על העתיד שלנו?"},
+      {q:"למה יש מוזיאונים?", h:"מה אפשר ללמוד ולראות בהם?"},
+      {q:"למה יש מאכלים שצריך לבשל לפני האכילה?", h:"מה הבישול עושה לאוכל?"},
+      {q:"למה יש מזג אוויר שונה?", h:"מה גורם לגשם, שמש או רוח?"},
+      {q:"מה היה קורה אם לא היו מכוניות?", h:"איך אנשים היו מגיעים למקומות רחוקים?"},
+      {q:"למה אנשים כותבים ספרים?", h:"מה אפשר להעביר לאחרים דרך ספר?"},
+      {q:"למה יש שמורות טבע וגנים לאומיים?", h:"על מה הם שומרים?"}
+    ],
+    3: [ // גילאי 10-12
+      {q:"למה יש בחירות ושיטה דמוקרטית?", h:"איך אנשים בוחרים מי יוביל אותם?"},
+      {q:"מה היה קורה אם לא היו אוקיינוסים?", h:"חשבו על מים, אקלים ובעלי חיים."},
+      {q:"למה יש מטבעות שונים במדינות שונות?", h:"איך זה קשור לכלכלה של כל מדינה?"},
+      {q:"מה היה קורה אם לא היה חשמל במשך שבוע?", h:"חשבו על בית, אוכל ותקשורת."},
+      {q:"למה חשוב לחסוך במים?", h:"כמה מהמים בעולם מתאימים לשתייה?"},
+      {q:"מה היה קורה אם כל הרי הגעש בעולם היו מתפרצים בבת אחת?", h:"חשבו על האוויר ועל האקלים."},
+      {q:"למה חשוב לשמר אתרים היסטוריים?", h:"מה אפשר ללמוד מהעבר?"},
+      {q:"למה חשוב ללמוד היסטוריה?", h:"איך טעויות העבר עוזרות לעתיד?"},
+      {q:"מה היה קורה אם דלקי המאובנים היו נגמרים?", h:"חשבו על אנרגיה חלופית."},
+      {q:"למה חשוב להפחית זיהום?", h:"איך זיהום משפיע על בריאות ועל הטבע?"},
+      {q:"למה יש מדינות שבהן יוקר המחיה גבוה יותר?", h:"מה משפיע על מחירים במקום מסוים?"},
+      {q:"מה היה קורה אם האינטרנט היה מפסיק לעבוד ליום שלם?", h:"על מה בחיים שלנו הוא משפיע?"},
+      {q:"למה מגוון ביולוגי חשוב למערכת אקולוגית?", h:"מה קורה כשמין אחד נעלם משרשרת המזון?"},
+      {q:"מה היה קורה אם כל העולם היה הופך לצמחוני?", h:"חשבו על חקלאות, סביבה וכלכלה."},
+      {q:"למה חשוב להגן על שכבת האוזון?", h:"ממה היא מגינה עלינו?"},
+      {q:"איך ההתחממות הגלובלית משפיעה על כדור הארץ?", h:"חשבו על קרחונים, מזג אוויר וים."},
+      {q:"מה היה קורה אם כל הקרח בעולם היה נמס?", h:"מה יקרה למפלס הים ולחופים?"},
+      {q:"למה חשובה תזונה מאוזנת?", h:"מה הגוף צריך כדי לתפקד היטב?"},
+      {q:"מה היה קורה אם לא היו יותר אנטיביוטיקות?", h:"איך מטפלים בזיהומים בלעדיהן?"},
+      {q:"למה לומדים מקצועות שונים בבית הספר?", h:"איך כל תחום עוזר בחיים?"},
+      {q:"למה אנרגיה מתחדשת חשובה לעתיד?", h:"במה היא שונה מדלק רגיל?"},
+      {q:"מה היה קורה אם כל שוניות האלמוגים בעולם היו מתות?", h:"חשבו על החיים בים."},
+      {q:"איך דיג יתר משפיע על המערכת הימית?", h:"מה קורה כשתופסים יותר מדי דגים?"},
+      {q:"מה היה קורה אם הקטבים המגנטיים של כדור הארץ היו מתהפכים?", h:"חשבו על מצפנים ועל ניווט."},
+      {q:"למה חשוב חופש הביטוי?", h:"למה חשוב שאנשים יוכלו להביע דעה?"},
+      {q:"מה היה קורה אם כל העולם היה מדבר באותה שפה?", h:"מה היה משתפר ומה אולי היה הולך לאיבוד?"},
+      {q:"למה למדינות יש גבולות?", h:"מה הם מסמנים ולמה הם נחוצים?"},
+      {q:"איך אסונות טבע משפיעים על קהילות?", h:"חשבו על בתים, אנשים ושיקום."},
+      {q:"מה היה קורה אם לא היו יותר מים מתוקים על כדור הארץ?", h:"על מה בחיים שלנו זה ישפיע?"},
+      {q:"למה חשוב להשקיע במחקר מדעי ובטכנולוגיה?", h:"איך זה משנה את החיים שלנו?"}
+    ]
+  };
+
+  /* ===== board-game engine ===== */
+  const LEVEL_META={1:"רמה 1 · גילאי 4–6",2:"רמה 2 · גילאי 7–9",3:"רמה 3 · גילאי 10–12"};
+  const TOTAL=20;
+  const DICE_ROT={1:[0,0],2:[0,180],3:[0,-90],4:[0,90],5:[-90,0],6:[90,0]};
+
+  // 20 themed stations — each its own world
+  const STATIONS=[
+    {n:"תחנת הזינוק", e:"🏡", c1:"#8FD694", c2:"#5BB368"},
+    {n:"יער הלחישות", e:"🌲", c1:"#4F9E6A", c2:"#2F7048"},
+    {n:"אגם הבדולח", e:"💧", c1:"#7FD3E8", c2:"#3FA9CC"},
+    {n:"גבעת הפרפרים", e:"🦋", c1:"#F4A6C8", c2:"#E66BA0"},
+    {n:"מערת הגבישים", e:"💎", c1:"#B79CE6", c2:"#8763C9"},
+    {n:"חוף הזהב", e:"🏖️", c1:"#FBE0A6", c2:"#F4B95E"},
+    {n:"אי האוצר", e:"🗺️", c1:"#5FD3B8", c2:"#2DA88C"},
+    {n:"הר הגעש", e:"🌋", c1:"#F2925E", c2:"#D9532E"},
+    {n:"מדבר הזהב", e:"🏜️", c1:"#ECC579", c2:"#C99A3C"},
+    {n:"נווה המדבר", e:"🌴", c1:"#7FCBA0", c2:"#3F9E78"},
+    {n:"עיר האורות", e:"🌃", c1:"#6E84C9", c2:"#3F4E9E"},
+    {n:"גשר הקשת", e:"🌈", c1:"#F2A6D6", c2:"#9C7BE6"},
+    {n:"יער הפטריות", e:"🍄", c1:"#E08AB5", c2:"#B05598"},
+    {n:"אגם הברבורים", e:"🦢", c1:"#BFE3F2", c2:"#7FB8D9"},
+    {n:"מבצר העננים", e:"☁️", c1:"#CFE0F2", c2:"#9CB8E0"},
+    {n:"שדה הכוכבים", e:"⭐", c1:"#8C8CE6", c2:"#5151B0"},
+    {n:"תחנת החלל", e:"🚀", c1:"#7E6BC9", c2:"#4A3F8C"},
+    {n:"כוכב הירח", e:"🌙", c1:"#C9CEDC", c2:"#8C93AB"},
+    {n:"שביל הזהב", e:"✨", c1:"#F7D98C", c2:"#E0B04E"},
+    {n:"ארמון הסיום", e:"🏆", c1:"#F4C95E", c2:"#D99A2E"}
+  ];
+
+  // winding path positions in viewBox coords (1000 x 1700), serpentine
+  const PATH=[];
+  (function buildPath(){
+    const cols=[180,400,620,820];          // x lanes
+    const rowH=300, top=130;
+    const perRow=4;
+    for(let i=0;i<TOTAL;i++){
+      const row=Math.floor(i/perRow);
+      let idx=i%perRow;
+      const ltr = row%2===0;               // alternate direction (serpentine)
+      const x = ltr ? cols[idx] : cols[perRow-1-idx];
+      // gentle vertical wave within the row
+      const y = top + row*rowH + Math.sin(i*1.1)*26;
+      PATH.push({x,y});
+    }
+  })();
+
+  let gState={level:null,char:"🦊",pos:0,deck:[],idx:0,rolling:false,started:false};
+
+  function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+
+  /* selection */
+  document.querySelectorAll('.char-card').forEach(c=>{
+    c.addEventListener('click',()=>{
+      document.querySelectorAll('.char-card').forEach(x=>x.classList.remove('sel'));
+      c.classList.add('sel');
+      gState.char=c.dataset.char;
+      maybeStart();
+    });
+  });
+  document.querySelectorAll('.level-card').forEach(c=>{
+    c.addEventListener('click',()=>{
+      document.querySelectorAll('.level-card').forEach(x=>x.classList.remove('sel'));
+      c.classList.add('sel');
+      gState.pendingLevel=parseInt(c.dataset.level);
+      maybeStart();
+    });
+  });
+  function maybeStart(){
+    const hasChar=document.querySelector('.char-card.sel');
+    const hasLvl=document.querySelector('.level-card.sel');
+    const hint=document.getElementById('setupHint');
+    if(hasChar&&hasLvl){
+      hint.textContent='יוצאים לדרך… 🚂';
+      setTimeout(()=>startLevel(gState.pendingLevel),350);
+    }else if(hasChar){hint.textContent='עכשיו בחרו רמת גיל 👇';}
+    else if(hasLvl){hint.textContent='עכשיו בחרו דמות 👆';}
+  }
+
+  function startLevel(lvl){
+    gState.level=lvl;
+    gState.deck=shuffle(QUESTIONS[lvl]);
+    gState.idx=0;gState.pos=0;gState.rolling=false;gState.started=false;
+    document.getElementById('gameSetup').style.display='none';
+    document.getElementById('gameBoard').style.display='block';
+    document.getElementById('winScreen').style.display='none';
+    document.getElementById('questionCard').style.display='block';
+    document.getElementById('lvlPill').textContent=LEVEL_META[lvl];
+    document.getElementById('playerToken').textContent=gState.char;
+    buildMap();
+    placeToken(0,false);
+    cameraTo(0);
+    updateBanner(0);
+    document.getElementById('qText').textContent='גלגלו את הקובייה כדי לצאת לדרך! 🎲';
+    document.getElementById('curStation').textContent='0';
+    document.getElementById('hintBtn').style.display='none';
+    document.getElementById('qHint').className='q-hint';document.getElementById('qHint').textContent='';
+    const btn=document.getElementById('rollBtn');btn.disabled=false;btn.textContent='🎲 גלגלו את הקובייה';
+    const d=document.getElementById('dice');d.className='dice';d.style.transform='rotateX(-20deg) rotateY(20deg)';
+  }
+
+  function buildMap(){
+    const rail=document.getElementById('mapRail');
+    const layer=document.getElementById('stationsLayer');
+    // build winding rail path
+    let d='M '+PATH[0].x+' '+PATH[0].y;
+    for(let i=1;i<TOTAL;i++){
+      const p0=PATH[i-1],p1=PATH[i];
+      const mx=(p0.x+p1.x)/2;
+      d+=` C ${mx} ${p0.y}, ${mx} ${p1.y}, ${p1.x} ${p1.y}`;
+    }
+    rail.innerHTML=`
+      <path d="${d}" fill="none" stroke="#ffffff" stroke-width="34" stroke-linecap="round" opacity="0.55"/>
+      <path d="${d}" fill="none" stroke="#C9956B" stroke-width="20" stroke-linecap="round" stroke-dasharray="2 30" opacity="0.85"/>
+    `;
+    // build stations
+    layer.innerHTML='';
+    STATIONS.forEach((s,i)=>{
+      const p=PATH[i];
+      const el=document.createElement('div');
+      el.className='station';el.id='st'+i;
+      el.style.left=(p.x/1000*100)+'%';
+      el.style.top=(p.y/1700*1700)+'px';
+      el.innerHTML=`<div class="st-num">${i+1}</div>
+        <div class="st-pin" style="background:linear-gradient(150deg,${s.c1},${s.c2})"><span>${s.e}</span></div>
+        <div class="st-label">${s.n}</div>`;
+      layer.appendChild(el);
+    });
+    paintStations();
+  }
+
+  function paintStations(){
+    for(let i=0;i<TOTAL;i++){
+      const el=document.getElementById('st'+i);if(!el)continue;
+      el.classList.remove('cur','done');
+      if(i<gState.pos)el.classList.add('done');
+      if(i===gState.pos)el.classList.add('cur');
+    }
+  }
+
+  function placeToken(i,hop){
+    const p=PATH[i];
+    const tok=document.getElementById('playerToken');
+    tok.style.left=(p.x/1000*100)+'%';
+    tok.style.top=p.y+'px';
+    if(hop){tok.classList.remove('hop');void tok.offsetWidth;tok.classList.add('hop');}
+  }
+
+  function cameraTo(i){
+    const vp=document.getElementById('mapViewport');
+    const world=document.getElementById('mapWorld');
+    const vh=vp.clientHeight;
+    const py=PATH[i].y;
+    let offset=py-vh/2;
+    const maxOffset=1700-vh;
+    offset=Math.max(0,Math.min(offset,maxOffset));
+    world.style.transform=`translateY(${-offset}px)`;
+  }
+
+  function updateBanner(i){
+    const s=STATIONS[i];
+    document.getElementById('sbEmoji').textContent=s.e;
+    document.getElementById('sbNum').textContent='תחנה '+(i+1);
+    document.getElementById('sbName').textContent=s.n;
+  }
+
+  function rollDice(){
+    if(gState.rolling)return;
+    gState.rolling=true;
+    document.getElementById('rollBtn').disabled=true;
+    const dice=document.getElementById('dice');
+    const roll=Math.floor(Math.random()*6)+1;
+    dice.classList.add('rolling');
+    setTimeout(()=>{
+      dice.classList.remove('rolling');
+      const[rx,ry]=DICE_ROT[roll];
+      dice.style.transform=`rotateX(${rx+720}deg) rotateY(${ry+720}deg)`;
+    },1040);
+    setTimeout(()=>{stepForward();gState.rolling=false;},1700);
+  }
+
+  function stepForward(){
+    // first roll lands on station 1 (index0 question); later rolls advance one station
+    if(gState.started){
+      if(gState.pos>=TOTAL-1){return;}
+      gState.pos++;gState.idx++;
+    }else{
+      gState.started=true; // stay at index 0, reveal first question
+    }
+    paintStations();
+    placeToken(gState.pos,true);
+    cameraTo(gState.pos);
+    updateBanner(gState.pos);
+    document.getElementById('curStation').textContent=gState.pos+1;
+
+    if(gState.pos>=TOTAL-1){
+      setTimeout(winGame,700);
+      return;
+    }
+    showQuestion();
+  }
+
+  function showQuestion(){
+    const card=gState.deck[gState.idx % gState.deck.length];
+    document.getElementById('qText').textContent=card.q;
+    document.getElementById('qHint').textContent='💡 '+card.h;
+    document.getElementById('qHint').className='q-hint';
+    document.getElementById('hintBtn').style.display='inline-block';
+    const btn=document.getElementById('rollBtn');
+    btn.disabled=false;
+    btn.textContent='🎲 ענו נכון? גלגלו שוב!';
+    document.getElementById('questionCard').scrollIntoView({behavior:'smooth',block:'center'});
+  }
+
+  function winGame(){
+    updateBanner(TOTAL-1);
+    document.getElementById('questionCard').style.display='none';
+    document.getElementById('winScreen').style.display='block';
+    document.getElementById('curStation').textContent=TOTAL;
+    fireConfetti();
+    document.getElementById('winScreen').scrollIntoView({behavior:'smooth',block:'center'});
+  }
+
+  function fireConfetti(){
+    const colors=['#F4A93C','#E06B9E','#6FBE7D','#6171C9','#FFD36B','#D9A98C','#7FD3E8'];
+    for(let i=0;i<110;i++){
+      const c=document.createElement('div');c.className='confetti';
+      c.style.left=Math.random()*100+'vw';
+      c.style.background=colors[Math.floor(Math.random()*colors.length)];
+      c.style.animationDuration=(2+Math.random()*2)+'s';
+      c.style.animationDelay=Math.random()*0.7+'s';
+      c.style.width=c.style.height=(7+Math.random()*9)+'px';
+      if(Math.random()>.5)c.style.borderRadius='50%';
+      document.body.appendChild(c);
+      setTimeout(()=>c.remove(),4400);
+    }
+  }
+
+  function toggleHint(){document.getElementById('qHint').classList.toggle('show')}
+
+  function resetGame(){
+    document.getElementById('gameBoard').style.display='none';
+    document.getElementById('gameSetup').style.display='block';
+    document.querySelectorAll('.char-card,.level-card').forEach(x=>x.classList.remove('sel'));
+    document.getElementById('setupHint').textContent='בחרו דמות ורמה כדי להתחיל את ההרפתקה ✨';
+    document.getElementById('gameSetup').scrollIntoView({behavior:'smooth',block:'center'});
+  }
+
+  function restartSameLevel(){startLevel(gState.level)}
+
+  /* ================= ROUTING ================= */
+  function go(id){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    const target=document.getElementById(id);
+    if(target)target.classList.add('active');
+    document.querySelectorAll('nav a').forEach(a=>{
+      a.classList.toggle('active',a.dataset.page===id);
+    });
+    document.getElementById('nav').classList.remove('open');
+    document.getElementById('burger').classList.remove('x');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  /* ---- burger ---- */
+  const burger=document.getElementById('burger');
+  burger.addEventListener('click',()=>{
+    document.getElementById('nav').classList.toggle('open');
+    burger.classList.toggle('x');
+  });
+
+  /* ---- form ---- */
+  function submitForm(e){
+    e.preventDefault();
+    document.getElementById('formMsg').style.display='block';
+    e.target.reset();
+    return false;
+  }
+</script>
+</body>
+</html>
