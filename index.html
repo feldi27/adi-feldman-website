@@ -274,7 +274,10 @@
   }
   .consent-row input{width:18px;height:18px;flex-shrink:0;margin-top:2px;accent-color:var(--accent-text)}
   .consent-row a{color:var(--accent-text);text-decoration:underline;cursor:pointer}
-  .form-msg{margin-top:14px;font-weight:600;color:var(--sage);display:none}
+  .form-msg{margin-top:16px;font-weight:700;font-size:1.05rem;display:none;padding:16px 18px;border-radius:16px;text-align:center;line-height:1.5}
+  .form-msg.ok{display:block;background:#E7F2E4;color:#2F5D34;border:2px solid #9CC79A}
+  .form-msg.err{display:block;background:#FBE9E7;color:#8A2A1E;border:2px solid #E3A49A}
+  #formBtn[disabled]{opacity:.7;cursor:wait}
   /* ---------- FOOTER ---------- */
   footer{background:var(--ink);color:var(--cream);padding:50px 28px 30px;margin-top:40px}
   .footer-inner{max-width:1140px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px}
@@ -1170,7 +1173,9 @@
           </a>
           <div class="contact-line contact-line-center"><span class="c-ico" data-icon="pin"></span><div><strong>קליניקה</strong><br>כרכור</div></div>
         </div>
-        <form onsubmit="return submitForm(event)">
+        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="return submitForm(event)">
+          <input type="hidden" name="form-name" value="contact">
+          <p class="sr-only" aria-hidden="true"><label>אל תמלאו שדה זה: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
           <p style="font-size:.88rem;color:var(--ink-soft);margin-bottom:14px">שדות המסומנים ב-<span aria-hidden="true">*</span><span class="sr-only">כוכבית</span> הם שדות חובה</p>
           <div class="field">
             <label for="name">שם מלא <span aria-hidden="true">*</span><span class="sr-only">(שדה חובה)</span></label>
@@ -1195,8 +1200,8 @@
               <span>קראתי ואני מסכימ/ה ל<a onclick="go('privacy')">מדיניות הפרטיות</a></span>
             </label>
           </div>
-          <button type="submit" class="btn btn-primary" style="width:100%">שליחה</button>
-          <div class="form-msg" id="formMsg" role="status" aria-live="polite"><span data-icon="heart"></span>תודה! ההודעה נשלחה, אחזור אליך בהקדם</div>
+          <button type="submit" id="formBtn" class="btn btn-primary" style="width:100%">שליחה</button>
+          <div class="form-msg" id="formMsg" role="status" aria-live="polite"></div>
         </form>
       </div>
     </section>
@@ -2105,8 +2110,22 @@ const QUARTETS_SHEETS = [
   /* ---- form ---- */
   function submitForm(e){
     e.preventDefault();
-    document.getElementById('formMsg').style.display='block';
-    e.target.reset();
+    const form=e.target,msg=document.getElementById('formMsg'),btn=document.getElementById('formBtn');
+    msg.className='form-msg';msg.textContent='';
+    btn.disabled=true;btn.textContent='שולח...';
+    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
+      body:new URLSearchParams(new FormData(form)).toString()})
+    .then(r=>{if(!r.ok)throw new Error(r.status);
+      form.reset();
+      msg.className='form-msg ok';msg.textContent='תודה! ההודעה נשלחה, אחזור אליך בהקדם 💛';
+      if(typeof showToast==='function')showToast('✓ ההודעה נשלחה בהצלחה');
+    })
+    .catch(()=>{
+      msg.className='form-msg err';
+      msg.innerHTML='אופס, ההודעה לא נשלחה. אפשר לנסות שוב או <a href="https://wa.me/972528220038" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline">לכתוב לי בוואטסאפ</a>';
+    })
+    .finally(()=>{btn.disabled=false;btn.textContent='שליחה';
+      msg.scrollIntoView({behavior:'smooth',block:'center'});});
     return false;
   }
 </script>
