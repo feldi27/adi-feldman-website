@@ -349,22 +349,18 @@
   .reviews-carousel{position:relative}
   .reviews-grid{
     --rv-gap:22px;--rv-per:3;
-    display:flex;align-items:stretch;gap:var(--rv-gap);overflow-x:auto;scroll-snap-type:x mandatory;
-    scroll-behavior:smooth;padding:10px 4px 26px;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+    display:flex;align-items:flex-start;gap:var(--rv-gap);overflow-x:auto;scroll-snap-type:x mandatory;
+    scroll-behavior:smooth;padding:10px 4px 26px;transition:height .35s ease;box-sizing:border-box;scrollbar-width:none;-webkit-overflow-scrolling:touch;
   }
   .reviews-grid::-webkit-scrollbar{display:none}
   .review-card{
     flex:0 0 calc((100% - (var(--rv-per) - 1) * var(--rv-gap)) / var(--rv-per));scroll-snap-align:start;
     background:var(--white);border-radius:16px;box-shadow:0 10px 26px var(--shadow);
     padding:22px 22px 18px;border:1px solid transparent;transition:.3s;
-    display:flex;flex-direction:column;align-self:stretch;
   }
   .rv-stars{color:#F4B400;letter-spacing:2px;font-size:1.05rem;margin-bottom:10px}
-  .rv-text{font-size:1rem;line-height:1.7;color:var(--ink);display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:7;overflow:hidden;flex:1}
+  .rv-text{font-size:1rem;line-height:1.7;color:var(--ink)}
   .rv-text p{margin:0}
-  .rv-more{align-self:flex-start;margin-top:12px;background:none;border:0;padding:0;color:var(--accent-text);font:inherit;font-weight:700;font-size:.92rem;cursor:pointer;text-decoration:underline;visibility:hidden}
-  .review-card.clamped .rv-more{visibility:visible}
-  .rv-more:focus-visible{outline:3px solid var(--accent-text);outline-offset:3px}
   .review-lightbox-inner .rv-stars{font-size:1.2rem}
   .review-lightbox-inner .rv-text{display:block;-webkit-line-clamp:unset;font-size:1.08rem;line-height:1.8}
   .review-lightbox-inner .rv-text p{margin:0}
@@ -1365,18 +1361,18 @@
     </a>
     <div class="reviews-carousel">
     <div class="reviews-grid" id="reviewsTrack">
-      <div class="review-card"><div class="rv-stars" aria-label="5 כוכבים">★★★★★</div><div class="rv-text"><p>הגענו לעדי ופשוט ידענו שזה זה!</p><p>מקצועית ברמות, יודעת בדיוק מה היא עושה, מתאימה שיטת טיפול ותוכנית טיפול מדויקת עבור הילד. קידמה את הילד שלי בצורה מדהימה, שפשוט לא היה מילים בפי.</p><p>מעבר לכל זה כדי נעימה ומקסימה ועושה את עבודתה עם מלא אהבה.</p><p>מומלצת ביותר!!</p></div><button type="button" class="rv-more" onclick="openReviewLightbox(this)">לקריאה המלאה</button></div>
-      <div class="review-card"><div class="rv-stars" aria-label="5 כוכבים">★★★★★</div><div class="rv-text"><p>עדי מקסימה ומקצוענית אמיתית. הצליחה להשיג את המטרות הרצויות בזמן קצר. בעלת גישה מהממת לילדים. ממליצה בחום!</p></div><button type="button" class="rv-more" onclick="openReviewLightbox(this)">לקריאה המלאה</button></div>
-      <div class="review-card"><div class="rv-stars" aria-label="5 כוכבים">★★★★★</div><div class="rv-text"><p>נהדרת, סבלנית ומקצועית!</p></div><button type="button" class="rv-more" onclick="openReviewLightbox(this)">לקריאה המלאה</button></div>
-      <div class="review-card"><div class="rv-stars" aria-label="5 כוכבים">★★★★★</div><div class="rv-text"><p>עדי סובלנית, נעימה, ומלאת קשב לילד או לילדה. מביאה המון עניין וחידוש לכל טיפול גם לגילאים הגדולים שכבר מורכב יותר לייצר קשב ושיתוף פעולה - לא מובן מאליו בכלל. ממליצה מכל הלב</p></div><button type="button" class="rv-more" onclick="openReviewLightbox(this)">לקריאה המלאה</button></div>
-      <div class="review-card"><div class="rv-stars" aria-label="5 כוכבים">★★★★★</div><div class="rv-text"><p>עדי מקצועית, סבלנית ומלאת ידע, שהצליחה להתחבר לבן שלי וליצור איתו תהליך התקדמות משמעותי. בזכותה ראינו שיפור ניכר, מומלצת בחום!</p></div><button type="button" class="rv-more" onclick="openReviewLightbox(this)">לקריאה המלאה</button></div>
-      <div class="review-card"><div class="rv-stars" aria-label="5 כוכבים">★★★★★</div><div class="rv-text"><p>ראשית, נאמר שאנו ממליצים מכל הלב על עדי הקלינאית מס׳ 1!!!! הגענו לעדי לאחר המלצות רבות שקיבלנו היות ולבננו היה קושי בביטוי האות ש׳ והאותיות השורקות. עוד במפגש הראשון נוכחנו לדעת שמדובר באשת מקצוע משכמה ומעלה ובנוסף לכל באישה מדהימה, נעימה והכי חשוב סובלנית כלפינו וכלפי בננו. המפגשים עברו בצורה נעימה ומיד לאחר כל מפגש עדי שלחה לנו משימות לתרגול בבית. ממפגש למפגש ראינו את השיפור הניכר אצל בננו עד שבזכות עדי הנהדרת הקושי נעלם כלא היה. אף לאחר סיום הטיפול ועד עצם היום הזה, עדי מלווה אותנו וזמינה עבורנו לכל שאלה שמתעוררת. אין על עדי וכן ירבו אנשי מקצוע כמותה. ממליצים ביותר מבחום רב על עדי ואין אלופות כמותה בתחום!!! תודה רבה רבה עדי על הכל ❤️</p></div><button type="button" class="rv-more" onclick="openReviewLightbox(this)">לקריאה המלאה</button></div>
-      <div class="review-card"><div class="rv-stars" aria-label="5 כוכבים">★★★★★</div><div class="rv-text"><p>עדי מדהימה.</p><p>גישה נפלאה לילדים.</p><p>שני הבנים שלי נעזרו בה.</p><p>הילדים עובדים ומשתפרים בלי לשים לב בכלל.</p><p>הצליחה לעורר בהם מוטיבציה לעשות את התרגילים בבית.</p><p>ובכלל הם התאהבו בה לגמרי.</p><p>אני ממליצה מאוד.</p><p>עדי סופר מקצועית וסופר מדוייקת וכל זה בא עם חיוך ענק.</p></div><button type="button" class="rv-more" onclick="openReviewLightbox(this)">לקריאה המלאה</button></div>
-      <div class="review-card"><div class="rv-stars" aria-label="5 כוכבים">★★★★★</div><div class="rv-text"><p>קלינאית תקשורת מדהימה!</p><p>בזכותה, הבת שלי עשתה התקדמות עצומה. היא סבלנית, מקצועית וידעה לתת לבת שלי בדיוק את מה שהיא צריכה. הבת שלי תמיד שמחה ללכת אליה, וזה אומר הכל.</p><p>ממליצה מכל הלב!</p></div><button type="button" class="rv-more" onclick="openReviewLightbox(this)">לקריאה המלאה</button></div>
-      <div class="review-card"><div class="rv-stars" aria-label="5 כוכבים">★★★★★</div><div class="rv-text"><p>השלמנו טיפול של כ-20 מפגשים אצל עדי עם הבת שלנו בת ה-8 שסבלה מדחיקת לשון. היה חיבור מיידי והיא הגיעה בשמחה לכל מפגש. עדי מאוד חמה ונעימה, מצויינת עם ילדים ועושה הכל בדרך כיפית של תרגול דרך משחק. מומלצת בחום.</p></div><button type="button" class="rv-more" onclick="openReviewLightbox(this)">לקריאה המלאה</button></div>
-      <div class="review-card"><div class="rv-stars" aria-label="5 כוכבים">★★★★★</div><div class="rv-text"><p>עדי קלינאית מדהימה! הגענו אליה בגיל 4, עם בעיית מובנות של הבת שלי שנבעה מקושי בהגייה של לא מעט צלילים. תוך פחות מחודשיים הכל נפתר והסתדר. הבת שלי אהבה כל כך להגיע לעדי, שממש ראתה אותה ואת הנפש שלה והצליחה ליצור חיבור מהיר וחזק, מה שאפשר שיתוף פעולה נהדר של הבת שלי. עדי מקצועית ביותר, תמיד מחוייכת, חמה ונעימה, עם המון סבלנות ודיבור לילד בגובה העיניים. וגם איתנו, ההורים, תמיד היתה זמינה לדבר ולייעץ. תודה, עדי! מי שמגיע אלייך -- זוכה!</p></div><button type="button" class="rv-more" onclick="openReviewLightbox(this)">לקריאה המלאה</button></div>
-      <div class="review-card"><div class="rv-stars" aria-label="5 כוכבים">★★★★★</div><div class="rv-text"><p>הגעתי לעדי בסביבות גיל 3.5 עם הבן שלי ומשם זה פשוט היה סיפור אהבה.</p><p>עדי ליוותה אותנו לאורך 4 שנים עם המון הבנה, הקשבה, עזרה וההכוונה שאף אחד אחר לא יכל להסביר יותר טוב ממנה!</p><p>והכי חשוב הסבלנות שלה לילד ואליי כהורה עם אין סוף שאלות. דברים כל כך חשובים שממש לא ברור מאליו שמתקבלים כחלק מהטיפול.</p><p>ממליצה בחום על עדי ללא שום מחשבה נוספת</p></div><button type="button" class="rv-more" onclick="openReviewLightbox(this)">לקריאה המלאה</button></div>
-      <div class="review-card"><div class="rv-stars" aria-label="5 כוכבים">★★★★★</div><div class="rv-text"><p>רוצה להמליץ מכל הלב על עדי! עדי היא קלינאית תקשורת מקצועית ברמות הגבוהות ביותר, אבל מעבר למקצועיות – היא פשוט מלאת סבלנות, רגישות ורוך. היא יודעת בדיוק איך להתחבר לילדים בגובה העיניים, לייצר סביבה נעימה ובטוחה, ולהפוך כל מפגש למהנה ומקדם. השיפור וההתקדמות ניכרים תוך זמן קצר, והכל באווירה טובה, ברוגע ועם המון חיוך. זכינו לעבוד איתה, ממליצה בחום!</p></div><button type="button" class="rv-more" onclick="openReviewLightbox(this)">לקריאה המלאה</button></div>
+      <div class="review-card"><div class="rv-stars" aria-label="5 כוכבים">★★★★★</div><div class="rv-text"><p>הגענו לעדי ופשוט ידענו שזה זה!</p><p>מקצועית ברמות, יודעת בדיוק מה היא עושה, מתאימה שיטת טיפול ותוכנית טיפול מדויקת עבור הילד. קידמה את הילד שלי בצורה מדהימה, שפשוט לא היה מילים בפי.</p><p>מעבר לכל זה כדי נעימה ומקסימה ועושה את עבודתה עם מלא אהבה.</p><p>מומלצת ביותר!!</p></div></div>
+      <div class="review-card"><div class="rv-stars" aria-label="5 כוכבים">★★★★★</div><div class="rv-text"><p>עדי מקסימה ומקצוענית אמיתית. הצליחה להשיג את המטרות הרצויות בזמן קצר. בעלת גישה מהממת לילדים. ממליצה בחום!</p></div></div>
+      <div class="review-card"><div class="rv-stars" aria-label="5 כוכבים">★★★★★</div><div class="rv-text"><p>נהדרת, סבלנית ומקצועית!</p></div></div>
+      <div class="review-card"><div class="rv-stars" aria-label="5 כוכבים">★★★★★</div><div class="rv-text"><p>עדי סובלנית, נעימה, ומלאת קשב לילד או לילדה. מביאה המון עניין וחידוש לכל טיפול גם לגילאים הגדולים שכבר מורכב יותר לייצר קשב ושיתוף פעולה - לא מובן מאליו בכלל. ממליצה מכל הלב</p></div></div>
+      <div class="review-card"><div class="rv-stars" aria-label="5 כוכבים">★★★★★</div><div class="rv-text"><p>עדי מקצועית, סבלנית ומלאת ידע, שהצליחה להתחבר לבן שלי וליצור איתו תהליך התקדמות משמעותי. בזכותה ראינו שיפור ניכר, מומלצת בחום!</p></div></div>
+      <div class="review-card"><div class="rv-stars" aria-label="5 כוכבים">★★★★★</div><div class="rv-text"><p>ראשית, נאמר שאנו ממליצים מכל הלב על עדי הקלינאית מס׳ 1!!!! הגענו לעדי לאחר המלצות רבות שקיבלנו היות ולבננו היה קושי בביטוי האות ש׳ והאותיות השורקות. עוד במפגש הראשון נוכחנו לדעת שמדובר באשת מקצוע משכמה ומעלה ובנוסף לכל באישה מדהימה, נעימה והכי חשוב סובלנית כלפינו וכלפי בננו. המפגשים עברו בצורה נעימה ומיד לאחר כל מפגש עדי שלחה לנו משימות לתרגול בבית. ממפגש למפגש ראינו את השיפור הניכר אצל בננו עד שבזכות עדי הנהדרת הקושי נעלם כלא היה. אף לאחר סיום הטיפול ועד עצם היום הזה, עדי מלווה אותנו וזמינה עבורנו לכל שאלה שמתעוררת. אין על עדי וכן ירבו אנשי מקצוע כמותה. ממליצים ביותר מבחום רב על עדי ואין אלופות כמותה בתחום!!! תודה רבה רבה עדי על הכל ❤️</p></div></div>
+      <div class="review-card"><div class="rv-stars" aria-label="5 כוכבים">★★★★★</div><div class="rv-text"><p>עדי מדהימה.</p><p>גישה נפלאה לילדים.</p><p>שני הבנים שלי נעזרו בה.</p><p>הילדים עובדים ומשתפרים בלי לשים לב בכלל.</p><p>הצליחה לעורר בהם מוטיבציה לעשות את התרגילים בבית.</p><p>ובכלל הם התאהבו בה לגמרי.</p><p>אני ממליצה מאוד.</p><p>עדי סופר מקצועית וסופר מדוייקת וכל זה בא עם חיוך ענק.</p></div></div>
+      <div class="review-card"><div class="rv-stars" aria-label="5 כוכבים">★★★★★</div><div class="rv-text"><p>קלינאית תקשורת מדהימה!</p><p>בזכותה, הבת שלי עשתה התקדמות עצומה. היא סבלנית, מקצועית וידעה לתת לבת שלי בדיוק את מה שהיא צריכה. הבת שלי תמיד שמחה ללכת אליה, וזה אומר הכל.</p><p>ממליצה מכל הלב!</p></div></div>
+      <div class="review-card"><div class="rv-stars" aria-label="5 כוכבים">★★★★★</div><div class="rv-text"><p>השלמנו טיפול של כ-20 מפגשים אצל עדי עם הבת שלנו בת ה-8 שסבלה מדחיקת לשון. היה חיבור מיידי והיא הגיעה בשמחה לכל מפגש. עדי מאוד חמה ונעימה, מצויינת עם ילדים ועושה הכל בדרך כיפית של תרגול דרך משחק. מומלצת בחום.</p></div></div>
+      <div class="review-card"><div class="rv-stars" aria-label="5 כוכבים">★★★★★</div><div class="rv-text"><p>עדי קלינאית מדהימה! הגענו אליה בגיל 4, עם בעיית מובנות של הבת שלי שנבעה מקושי בהגייה של לא מעט צלילים. תוך פחות מחודשיים הכל נפתר והסתדר. הבת שלי אהבה כל כך להגיע לעדי, שממש ראתה אותה ואת הנפש שלה והצליחה ליצור חיבור מהיר וחזק, מה שאפשר שיתוף פעולה נהדר של הבת שלי. עדי מקצועית ביותר, תמיד מחוייכת, חמה ונעימה, עם המון סבלנות ודיבור לילד בגובה העיניים. וגם איתנו, ההורים, תמיד היתה זמינה לדבר ולייעץ. תודה, עדי! מי שמגיע אלייך -- זוכה!</p></div></div>
+      <div class="review-card"><div class="rv-stars" aria-label="5 כוכבים">★★★★★</div><div class="rv-text"><p>הגעתי לעדי בסביבות גיל 3.5 עם הבן שלי ומשם זה פשוט היה סיפור אהבה.</p><p>עדי ליוותה אותנו לאורך 4 שנים עם המון הבנה, הקשבה, עזרה וההכוונה שאף אחד אחר לא יכל להסביר יותר טוב ממנה!</p><p>והכי חשוב הסבלנות שלה לילד ואליי כהורה עם אין סוף שאלות. דברים כל כך חשובים שממש לא ברור מאליו שמתקבלים כחלק מהטיפול.</p><p>ממליצה בחום על עדי ללא שום מחשבה נוספת</p></div></div>
+      <div class="review-card"><div class="rv-stars" aria-label="5 כוכבים">★★★★★</div><div class="rv-text"><p>רוצה להמליץ מכל הלב על עדי! עדי היא קלינאית תקשורת מקצועית ברמות הגבוהות ביותר, אבל מעבר למקצועיות – היא פשוט מלאת סבלנות, רגישות ורוך. היא יודעת בדיוק איך להתחבר לילדים בגובה העיניים, לייצר סביבה נעימה ובטוחה, ולהפוך כל מפגש למהנה ומקדם. השיפור וההתקדמות ניכרים תוך זמן קצר, והכל באווירה טובה, ברוגע ועם המון חיוך. זכינו לעבוד איתה, ממליצה בחום!</p></div></div>
     </div>
     <div class="rv-nav">
       <button type="button" class="rv-arrow" id="rvPrev" aria-label="הביקורות הקודמות">→</button>
@@ -1876,15 +1872,18 @@
       [...dotsWrap.children].forEach((d,i)=>d.classList.toggle('on',i===p));}
     document.getElementById('rvNext').onclick=()=>{goTo(page()+1);hold();};
     document.getElementById('rvPrev').onclick=()=>{goTo(page()-1);hold();};
-    track.addEventListener('scroll',()=>requestAnimationFrame(markDots),{passive:true});
+    function fitHeight(){const tr=track.getBoundingClientRect();let h=0;
+      cards.forEach(c=>{const r=c.getBoundingClientRect();if(r.right>tr.left+20&&r.left<tr.right-20)h=Math.max(h,r.height);});
+      if(h)track.style.height=(h+36)+'px';}
+    track.addEventListener('scroll',()=>requestAnimationFrame(()=>{markDots();fitHeight();}),{passive:true});
+    addEventListener('resize',()=>{clearTimeout(fitHeight.t);fitHeight.t=setTimeout(fitHeight,150);});
+    if(document.fonts)document.fonts.ready.then(fitHeight);
+    fitHeight();
     let resizeT;addEventListener('resize',()=>{clearTimeout(resizeT);resizeT=setTimeout(buildDots,150);});
     const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;let timer=null,paused=false;
     function hold(){paused=true;clearTimeout(hold.t);hold.t=setTimeout(()=>paused=false,12000);}
     if(!reduce)timer=setInterval(()=>{if(!paused&&!document.hidden&&track.getBoundingClientRect().top<innerHeight)goTo(page()+1);},6000);
     ['pointerdown','touchstart','mouseenter','focusin'].forEach(ev=>track.addEventListener(ev,hold,{passive:true}));
-    function markClamped(){cards.forEach(c=>{const t=c.querySelector('.rv-text');c.classList.toggle('clamped',t.scrollHeight>t.clientHeight+2);});}
-    markClamped();addEventListener('resize',()=>{clearTimeout(markClamped.t);markClamped.t=setTimeout(markClamped,150);});
-    if(document.fonts)document.fonts.ready.then(markClamped);
     buildDots();
   })();
   document.getElementById('reviewLightboxClose').addEventListener('click',closeReviewLightbox);
