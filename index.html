@@ -1061,7 +1061,7 @@
         <div class="house-info">
           <h3 class="house-title">הבית שלנו מתמלא בשפה</h3>
           <p class="house-sub" id="houseSub">כל רעיון שתיישמו — ידליק עוד אור בבית. הצליחו להאיר את כל החלונות!</p>
-          <div class="house-progress"><span id="houseCount">0</span> / 48 רגעים האירו את הבית היום</div>
+          <div class="house-progress"><span id="houseCount">0</span> / <span id="houseTotal">52</span> רגעים האירו את הבית היום</div>
           <div class="house-bar"><div class="house-bar-fill" id="houseBarFill"></div></div>
           <p class="house-note">כדי שההתקדמות שלכם תישמר, היכנסו מאותו המכשיר ומאותו הדפדפן בכל פעם.</p>
         </div>
@@ -1561,76 +1561,80 @@
   /* ---- moments data ---- */
   const moments = [
     {key:'bath', icon:'bath', label:'אמבטיה', tips:[
-      'שימוש בפעלים ספציפיים: להתפשט, לחלוץ, ללבוש, להתקלח, לשטוף, לסבן, לחפוף.',
-      'העשרת השיח בתארים והפכים: נקי מול מלוכלך, רטוב מול יבש, חם, פושר, קר.',
-      'המשגת קטגוריות וחלקי גוף: "כלי רחצה", ברכיים, כתפיים, מרפק, כף יד וכף רגל.',
-      'שירו יחד שיר קצר על רחצה, וחזרו על מילות המפתח כמה פעמים.'
+      "משתמשים בפעלים ספציפיים - להתפשט, לפשוט, לחלוץ, לסבן, לחפוף, להתלבש, ללבוש ולהלביש.",
+      "מעשרים את השיח בתארים והפכים - נקי ומלוכלך, רטוב ויבש, חם, קר ופושר.",
+      "מדברים על שמות קטגוריות וחלקי גוף - בגדים, כלי רחצה, ידיים, בטן, שיער ועוד.",
+      "מתארים את רצף הפעולות - קודם מרטיבים, אחר כך מסבנים ולבסוף שוטפים.",
+      "שרים יחד שירים ודקלומים בנושא הרחצה, ואפשר גם להמציא שירים משלכם."
     ]},
     {key:'kitchen', icon:'kitchen', label:'מטבח', tips:[
-      'מנו יחד מרכיבים ופעולות: לחתוך, לערבב, לטעום, למזוג.',
-      'דברו על מרקמים וטעמים: חלק, גס, מתוק, חמוץ, חם, קר.',
-      'בקשו עזרה קטנה ותנו הוראות — הזדמנות נהדרת להבנת שפה.',
-      'תנו שם לכלים ולמכשירים במטבח וספרו יחד כמה יש מכל סוג.'
+      "נותנים שמות לכלי המטבח השונים, לחלקיהם ולשימושיהם - מחבת, סיר, מכסה, מצנם, ידית, כף ועוד.",
+      "משתמשים בפעלים ספציפיים - לחתוך, לערבב, לקלף, לטגן, לאפות ולמרוח.",
+      "מדברים על טעמים ותארים - חמוץ, מתוק, מלוח, מר, חם, קר, קשה ורך.",
+      "מדברים על שמות קטגוריות - פירות, ירקות, תבלינים ועוד."
     ]},
     {key:'drive', icon:'drive', label:'נסיעה', tips:[
-      'תארו מה רואים בחוץ: רכבים, צבעים, בעלי חיים, מבנים.',
-      'שירו שירים מוכרים והשלימו מילים יחד.',
-      'שחקו ב"מי רואה..." לחיזוק אוצר מילים וקשב.',
-      'תרגלו מושגי מקום תוך כדי נסיעה: קרוב, רחוק, לפני, אחרי.'
+      "מתארים את מה שרואים בחוץ - כלי תחבורה, צבעים, בעלי חיים, צמחים ואנשים.",
+      "מעשירים את אוצר המילים באמצעות הפכים - קרוב ורחוק, מהר ולאט, גדול וקטן.",
+      "משחקים במשחק \"אני רואה משהו ש…\" - נותנים רמזים ומתבוננים יחד כדי לנחש.",
+      "שואלים, חושבים וממציאים סיפורים על הדרך - לאן נוסעת המכונית האדומה? מי נוסע באוטובוס ולאן?"
     ]},
     {key:'getready', icon:'shirt', label:'התארגנות', tips:[
-      'תארו את סדר הפעולות: קודם, אחר כך, בסוף.',
-      'מנו פריטי לבוש וחלקי גוף תוך כדי הלבשה.',
-      'תנו בחירה: "החולצה הכחולה או הירוקה?" לעידוד הבעה.',
-      'ספרו יחד את שלבי ההתארגנות בקול, מהראשון עד האחרון.'
+      "מתארים את סדר הפעולות - קודם, אחר כך, בסוף.",
+      "משתמשים בפעלים ספציפיים - ללבוש, לגרוב, לנעול, לחבוש ועוד.",
+      "סופרים פריטים תוך כדי התארגנות - חולצה אחת, שתי נעליים.",
+      "שואלים שאלות בחירה - \"נלבש את החולצה האדומה או הירוקה?\"",
+      "מתארים את מאפייני הבגדים – ארוך וקצר, עבה ודק, חלק ומחוספס, גדול וקטן."
     ]},
     {key:'trips', icon:'mountain', label:'טיולים', tips:[
-      'תייגו את מה שפוגשים בטבע: עץ, פרח, אבן, ציפור.',
-      'דברו על תחושות: חם, קריר, רך, מחוספס.',
-      'ספרו סיפור קטן על ההרפתקה תוך כדי הליכה.',
-      'עודדו שאלות סקרניות: "מה זה?", "למה?", "איך?".'
+      "מתארים את מה שאנחנו רואים - בעלי חיים, צמחים, פרחים, צבעים וצורות.",
+      "מדברים על תחושות - קריר, נעים, מסנוור, רועש, שקט ומרענן.",
+      "מעודדים חשיבה וסקרנות - \"מה לדעתך נמצא בסוף השביל?\", \"למה העצים האלה גבוהים?\"",
+      "משווים בין דברים בסביבה - מי גבוה יותר? איזה פרח קטן יותר? במה דומים שני העצים?",
+      "ממציאים סיפורי הרפתקאות תוך כדי ההליכה."
     ]},
     {key:'tidy', icon:'tidy', label:'סידור הבית', tips:[
-      'מיינו לפי קטגוריות: צעצועים, ספרים, בגדים.',
-      'השתמשו במילות מיקום: בתוך, על, מתחת, ליד.',
-      'הפכו את הסידור למשחק עם הוראות פשוטות.',
-      'ספרו יחד כמה פריטים סידרתם בכל קטגוריה.'
+      "ממיינים חפצים לפי קטגוריות - צעצועים, ספרים, בגדים, כלי מטבח ועוד.",
+      "משתמשים בפעלים ספציפיים - לנקות, לנגב, לטאטא, לשאוב, לקפל ולסדר.",
+      "משתמשים במילות יחס - בתוך, ליד, על, מתחת, מעל ומאחורי.",
+      "סופרים יחד פריטים מכל קטגוריה - כמה ספרים סידרנו? כמה צעצועים נשארו?"
     ]},
     {key:'sleep', icon:'moon', label:'שינה', tips:[
-      'סכמו יחד את היום: "מה עשינו היום?"',
-      'דברו ברוגע על רגשות שעלו במהלך היום.',
-      'שגרה קבועה של מילים מרגיעות לפני השינה.',
-      'קראו יחד ספר קצר ותייגו את הדמויות והפעולות בתמונות.'
+      "מדברים על היום שהיה לנו - מה עשינו בבוקר? לאן הלכנו? את מי פגשנו?",
+      "קוראים יחד סיפור או ממציאים סיפור לפני השינה.",
+      "מדברים על הרגשות שעלו במהלך היום - מה שימח אותנו? מה היה מאתגר? מתי התרגשנו?",
+      "מדמיינים ומתכננים - \"מה היית רוצה לעשות מחר?\", \"לאן היית רוצה לטייל בחלום?\""
     ]},
     {key:'story', icon:'story', label:'סיפור', tips:[
-      'עצרו ושאלו "מה את חושבת שיקרה עכשיו?"',
-      'הצביעו על תמונות ותייגו אותן יחד.',
-      'חברו את הסיפור לחיים: "גם לנו יש את זה בבית!"',
-      'נחשו יחד מה יקרה בעמוד הבא לפני שהופכים אותו.'
+      "מתבוננים יחד באיורים ומדברים על הדמויות, הפעולות והמקומות המופיעים בהם.",
+      "שואלים שאלות המעודדות חשיבה – \"מה לדעתך יקרה עכשיו?\", \"למה הדמות עשתה את זה?\"",
+      "ממציאים סוף חדש לסיפור או משנים את מהלך העלילה.",
+      "מעשירים את אוצר המילים באמצעות מילים חדשות מתוך הסיפור ומנסים לשלב אותן בשיחה."
     ]},
     {key:'art', icon:'art', label:'יצירה', tips:[
-      'תארו צבעים, צורות וגדלים תוך כדי יצירה.',
-      'השתמשו בפעלים: לגזור, להדביק, לצבוע, לקפל.',
-      'תנו לילד לספר על מה שיצר — בלי לתקן.',
-      'ספרו יחד כמה חלקים או צבעים השתמשתם ביצירה.'
+      "משתמשים בפעלים ספציפיים - לצבוע, לצייר, לגזור, להדביק, לקשקש, למרוח ולקפל.",
+      "משתמשים בתארים - צבעוני, בהיר, כהה, עבה, דק, גדול וקטן.",
+      "מדברים על חלקי השלם - הגבעול של הפרח, הגג של הבית, הגלגלים של המכונית.",
+      "מעודדים את הילדים לתאר - מה ציירת? באילו צבעים השתמשת? מה בחרת להוסיף?"
     ]},
     {key:'garden', icon:'garden', label:'גינה', tips:[
-      'מנו צמחים, חרקים וכלי גינון.',
-      'דברו על תהליך: לזרוע, להשקות, לצמוח.',
-      'תארו תחושות מהאדמה, העלים והפרחים.',
-      'תארו יחד שינויים בצמחים לאורך זמן: קטן, גדול, פרח, עלה.'
+      "משתמשים בפעלים ספציפיים - לעדור, לשתול, לזרוע, להשקות, לקטוף.",
+      "מדברים על שמות הצמחים וחלקיהם – עץ, גזע, ענף, שורש, פרח, גבעול ועלי כותרת.",
+      "משתמשים בתארים - גדול, גבוה, נמוך, חלק, מחוספס, רך, קוצני וריחני.",
+      "מתבוננים בבעלי החיים שבגינה - נמלה, פרפר, דבורה, חיפושית ותולעת."
     ]},
     {key:'shopping', icon:'shopping', label:'קניות', tips:[
-      'הכינו יחד רשימה ותייגו מוצרים.',
-      'דברו על כמויות: הרבה, מעט, אחד, עוד.',
-      'בקשו מהילד לאתר פריט — חיזוק הבנה וקשב.',
-      'השוו בין מוצרים: גדול מול קטן, כבד מול קל, יקר מול זול.'
+      "מדברים על קטגוריות - פירות, ירקות, מאפים, מוצרי ניקיון.",
+      "משתמשים במושגי כמות - הרבה, מעט, קצת, יותר, פחות, חצי ושלם.",
+      "מדברים על תארים ומרקמים - טעים, חמוץ, מתוק, מחוספס, חלק, ארוך וכבד.",
+      "משתמשים בפעלים ספציפיים - לבחור, לשקול, לשלם, לארוז."
     ]},
     {key:'home', icon:'home', label:'בית', tips:[
-      'כל פינה בבית היא הזדמנות לשיחה ולמשחק.',
-      'שלבו שפה בפעולות הכי שגרתיות שביום.',
-      'הקשיבו, הגיבו, וחזרו על מה שהילד אומר.',
-      'תנו שמות לחדרים ולפינות הבית וספרו מה יש בכל אחד.'
+      "מדברים על חדרי הבית השונים ומה עושים בכל אחד מהם - מטבח, אמבטיה, סלון וחדר שינה.",
+      "מדברים על קטגוריות של חפצים בבית - רהיטים, מוצרי חשמל, כלי מטבח, כלי רחצה וצעצועים.",
+      "מתארים את החפצים ואת המאפיינים שלהם - גדול, קטן, רך, קשה, עגול, מרובע, גבוה ונמוך.",
+      "משתמשים במילות יחס ומיקום - בתוך, מחוץ, מעל, מתחת, בין, ליד ומאחורי.",
+      "מתארים פעולות ושימושים - על מה יושבים? במה מאירים את החדר? איפה שומרים את הבגדים?"
     ]}
   ];
   /* ============ PARENT HUB ENGINE ============ */
@@ -1646,9 +1650,10 @@
     s.giftEarned=!!s.giftEarned;
     return s;
   }
-  function taskArr(key){return hub.tasksToday[key]||[false,false,false,false];}
-  function countFullyLit(){return moments.filter(m=>taskArr(m.key).filter(Boolean).length>=4).length;}
-  const TOTAL_TASKS=moments.length*4;   // 12 categories × 4 tasks each = 48
+  function taskArr(key){return hub.tasksToday[key]||[];}
+  function tipCount(i){return moments[i].tips.length;}
+  function countFullyLit(){return moments.filter(m=>taskArr(m.key).filter(Boolean).length>=m.tips.length).length;}
+  const TOTAL_TASKS=moments.reduce((s,m)=>s+m.tips.length,0);   // total ideas across all categories
   function countTasksDone(){return moments.reduce((s,m)=>s+taskArr(m.key).filter(Boolean).length,0);}
   let hub=loadHub();
   function saveHub(){try{localStorage.setItem(STORE_KEY,JSON.stringify(hub));}catch(e){}}
@@ -1659,17 +1664,16 @@
     for(let r=0;r<3;r++){for(let c=0;c<4;c++){list.push({x:colX[c],y:rowY[r],w:winW,h:winH});}}
     return list;
   })();
-  /* each window is split into 4 quadrants (data-q="0..3"), one per task */
+  /* each window is split into one pane per task (data-q="0..n-1"): 2 rows, top row gets floor(n/2) panes */
   function winSVG(i,w){
-    const mx=w.x+w.w/2,my=w.y+w.h/2;
-    return `<g id="slot${i}" class="hwin">
-      <rect class="pane" data-q="0" x="${w.x}" y="${w.y}" width="${w.w/2}" height="${w.h/2}" rx="1"/>
-      <rect class="pane" data-q="1" x="${mx}" y="${w.y}" width="${w.w/2}" height="${w.h/2}" rx="1"/>
-      <rect class="pane" data-q="2" x="${w.x}" y="${my}" width="${w.w/2}" height="${w.h/2}" rx="1"/>
-      <rect class="pane" data-q="3" x="${mx}" y="${my}" width="${w.w/2}" height="${w.h/2}" rx="1"/>
-      <rect class="frame" x="${w.x}" y="${w.y}" width="${w.w}" height="${w.h}" rx="2"/>
-      <line class="mut" x1="${mx}" y1="${w.y}" x2="${mx}" y2="${w.y+w.h}"/>
-      <line class="mut" x1="${w.x}" y1="${my}" x2="${w.x+w.w}" y2="${my}"/></g>`;
+    const n=tipCount(i),top=Math.floor(n/2),rows=[top,n-top],h=w.h/2;
+    let panes='',lines='',q=0;
+    rows.forEach((cnt,r)=>{const pw=w.w/cnt,y=w.y+r*h;
+      for(let c=0;c<cnt;c++){panes+=`<rect class="pane" data-q="${q++}" x="${w.x+c*pw}" y="${y}" width="${pw}" height="${h}" rx="1"/>`;
+        if(c>0)lines+=`<line class="mut" x1="${w.x+c*pw}" y1="${y}" x2="${w.x+c*pw}" y2="${y+h}"/>`;}});
+    return `<g id="slot${i}" class="hwin">${panes}
+      <rect class="frame" x="${w.x}" y="${w.y}" width="${w.w}" height="${w.h}" rx="2"/>${lines}
+      <line class="mut" x1="${w.x}" y1="${w.y+h}" x2="${w.x+w.w}" y2="${w.y+h}"/></g>`;
   }
   function buildHouse(){
     const layer=document.getElementById('houseSlots');if(!layer)return;
@@ -1683,10 +1687,11 @@
       const arr=taskArr(m.key),doneN=arr.filter(Boolean).length;
       g.querySelectorAll('[data-q]').forEach(q=>{q.classList.toggle('lit',!!arr[+q.dataset.q]);});
       g.classList.toggle('any',doneN>0);
-      g.classList.toggle('full',doneN>=4);
+      g.classList.toggle('full',doneN>=m.tips.length);
     });
     const done=countTasksDone();
     const count=document.getElementById('houseCount');if(count)count.textContent=done;
+    const tot=document.getElementById('houseTotal');if(tot)tot.textContent=TOTAL_TASKS;
     const fill=document.getElementById('houseBarFill');if(fill)fill.style.width=(done/TOTAL_TASKS*100)+'%';
     const stage=document.querySelector('.house-stage');if(stage)stage.classList.toggle('full',done>=TOTAL_TASKS);
     const sub=document.getElementById('houseSub');
@@ -1766,7 +1771,7 @@
       const i=+el.dataset.idx,m=moments[i];
       const inR=hub.routine.includes(m.key),doneN=taskArr(m.key).filter(Boolean).length;
       el.classList.toggle('in-routine',inR);
-      el.classList.toggle('fully-done',doneN>=4);
+      el.classList.toggle('fully-done',doneN>=m.tips.length);
       el.querySelectorAll('.m-badge').forEach(b=>b.remove());
       if(inR){
         const b=document.createElement('span');b.className='m-badge star';
@@ -1778,9 +1783,9 @@
         el.appendChild(b);
       }
       if(doneN>0){
-        const b=document.createElement('span');b.className='m-badge check'+(doneN>=4?' full':'');
+        const b=document.createElement('span');b.className='m-badge check'+(doneN>=m.tips.length?' full':'');
         b.setAttribute('aria-hidden','true');
-        b.textContent=doneN>=4?'✓':doneN+'/4';
+        b.textContent=doneN>=m.tips.length?'✓':doneN+'/'+m.tips.length;
         el.appendChild(b);
       }
     });
@@ -1842,12 +1847,12 @@
   function updateModalProgress(arr){
     const prog=document.getElementById('modalProgress');
     if(!prog)return;
-    const n=arr.filter(Boolean).length;
-    prog.textContent=n>=4?'כל ארבע המשימות הושלמו — החלון בבית מואר! ✨':n+' מתוך 4 משימות הושלמו היום';
+    const n=arr.filter(Boolean).length,N=moments[curModalIdx].tips.length;
+    prog.textContent=n>=N?'כל המשימות הושלמו — החלון בבית מואר! ✨':n+' מתוך '+N+' משימות הושלמו היום';
   }
   function toggleTask(i,ti,el){
     const m=moments[i];
-    const arr=hub.tasksToday[m.key]=hub.tasksToday[m.key]||[false,false,false,false];
+    const arr=hub.tasksToday[m.key]=hub.tasksToday[m.key]||[];
     const willBeDone=!arr[ti];
     arr[ti]=willBeDone;
     saveHub();
