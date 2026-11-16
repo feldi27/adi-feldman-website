@@ -131,6 +131,16 @@
   nav a:hover,nav a.active{background:var(--accent-text);color:var(--white)}
   .burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px}
   .burger span{width:26px;height:2.5px;background:var(--ink);border-radius:2px;transition:.3s}
+  .hdr-social{display:flex;gap:4px;align-items:center;border-inline-start:1px solid rgba(166,85,139,.25);padding-inline-start:12px}
+  .hdr-ico{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--ink-soft);transition:.2s}
+  .hdr-ico:hover{background:var(--accent-text);color:var(--white)}
+  .hdr-ico .ic{width:18px;height:18px}
+  .menu-social{display:none}
+  @media(max-width:900px){
+    .hdr-social{display:none}
+    .menu-social{display:flex;justify-content:center;gap:12px;padding:6px 16px 20px;border-top:1px solid rgba(227,168,181,.3);margin:0 16px}
+    .menu-social .hdr-ico{width:44px;height:44px;border:1.5px solid rgba(166,85,139,.3);color:var(--accent-text)}
+  }
   /* ---------- PAGES ---------- */
   main{padding-top:78px}
   .page{display:none;animation:fade .6s ease}
@@ -943,7 +953,9 @@
         <li><a data-page="downloads" onclick="go('downloads')">פינת המשחקים</a></li>
         <li><a data-page="contact" onclick="go('contact')">יצירת קשר</a></li>
       </ul>
+    <div class="menu-social"><a class="hdr-ico" href="https://www.instagram.com/adi.feldman.slp/" target="_blank" rel="noopener noreferrer" aria-label="אינסטגרם" data-icon="instagram"></a><a class="hdr-ico" href="https://www.youtube.com/channel/UCk3EtO1h9Q31SK5tfFmsSlg" target="_blank" rel="noopener noreferrer" aria-label="ערוץ היוטיוב" data-icon="youtube"></a><a class="hdr-ico" href="https://open.spotify.com/show/033WGoGGe0zxDsbvaiANvu" target="_blank" rel="noopener noreferrer" aria-label="הפודקאסט בספוטיפיי" data-icon="spotify"></a></div>
     </nav>
+    <div class="hdr-social"><a class="hdr-ico" href="https://www.instagram.com/adi.feldman.slp/" target="_blank" rel="noopener noreferrer" aria-label="אינסטגרם" data-icon="instagram"></a><a class="hdr-ico" href="https://www.youtube.com/channel/UCk3EtO1h9Q31SK5tfFmsSlg" target="_blank" rel="noopener noreferrer" aria-label="ערוץ היוטיוב" data-icon="youtube"></a><a class="hdr-ico" href="https://open.spotify.com/show/033WGoGGe0zxDsbvaiANvu" target="_blank" rel="noopener noreferrer" aria-label="הפודקאסט בספוטיפיי" data-icon="spotify"></a></div>
   </div>
 </header>
 <main id="main-content" tabindex="-1">
