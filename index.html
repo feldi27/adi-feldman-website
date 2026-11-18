@@ -1862,7 +1862,7 @@ window.uPage=function(id){try{if(window.umami)window.umami.track(function(p){ret
     const arr=hub.tasksToday[m.key]=hub.tasksToday[m.key]||[];
     const willBeDone=!arr[ti];
     arr[ti]=willBeDone;
-    if(willBeDone)uTrack('moment-task-done',{moment:m.label});
+    uTrack(willBeDone?'moment-task-done':'moment-task-undo',{moment:m.label,task:ti+1,text:m.tips[ti].slice(0,120)});
     saveHub();
     el.classList.toggle('done',willBeDone);
     el.setAttribute('aria-pressed',willBeDone?'true':'false');
@@ -1964,6 +1964,7 @@ window.uPage=function(id){try{if(window.umami)window.umami.track(function(p){ret
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('reviewLightbox').classList.contains('open'))closeReviewLightbox();});
   document.getElementById('modalRoutine').addEventListener('click',function(){
     if(curModalIdx==null)return;const m=moments[curModalIdx];
+    uTrack(hub.routine.includes(m.key)?'routine-remove':'routine-add',{moment:m.label});
     if(hub.routine.includes(m.key)){hub.routine=hub.routine.filter(k=>k!==m.key);}
     else{
       if(hub.routine.length>=3){showToast(icon('star')+'<span>אפשר לבחור עד 3 רגעים לשבוע</span>');return;}
@@ -1975,10 +1976,10 @@ window.uPage=function(id){try{if(window.umami)window.umami.track(function(p){ret
   function checkMilestone(){
     const n=countTasksDone();
     if(n>=20&&!hub.giftEarned){
-      hub.giftEarned=true;saveHub();renderDownloads();
+      hub.giftEarned=true;saveHub();renderDownloads();uTrack('gift-unlocked');
       showToast(icon('gift')+'<span>פתחתם מתנה שפתית! בקרו ב"פינת המשחקים" כדי לראות</span>');
     }
-    if(n>=TOTAL_TASKS){fireConfetti();showToast(icon('trophy')+'<span>הדלקתם את כל הבית! איזו גאווה</span>');}
+    if(n>=TOTAL_TASKS){uTrack('house-complete');fireConfetti();showToast(icon('trophy')+'<span>הדלקתם את כל הבית! איזו גאווה</span>');}
   }
   /* ---- parent toolbox / downloads (designed placeholders) ---- */
 const QUARTETS_SHEETS = [
@@ -2159,6 +2160,7 @@ const QUARTETS_SHEETS = [
     disp.className='story-card '+cat;
     document.getElementById('storyCardIcon').innerHTML=icon(STORY_META[cat].icon);
     document.getElementById('storyCardText').textContent=text;
+    uTrack('story-card-draw',{category:STORY_META[cat].label,card:text.slice(0,200)});
     document.getElementById('storyDrawBtn').style.display='inline-flex';
     document.querySelectorAll('.story-cat-btn').forEach(b=>b.classList.toggle('active',b.dataset.cat===cat));
   }
@@ -2253,19 +2255,37 @@ const QUARTETS_SHEETS = [
     window.scrollTo({top:0,behavior:'smooth'});
   }
   /* ---- analytics: click tracking (Umami) ---- */
+  const GAME_GRIDS={quartetsSheetsGrid:'רביעיות קטגוריות',kategoriaSheetsGrid:'קטגור-יא',bingoSheetsGrid:'בינגו חיות'};
   document.addEventListener('click',function(e){
-    const a=e.target.closest('a,[role="button"].dl-card');if(!a)return;
-    const href=a.getAttribute('href')||'';
-    const where=a.closest('header nav .menu-social')?'menu':a.closest('header')?'header':a.closest('footer')?'footer':
-      a.closest('.hero')?'hero':a.closest('#workshops')?'workshop':a.closest('#formMsg')?'form-error':
-      a.closest('#contact')?'contact':a.closest('.ig-feed,[class*="ig-"]')?'instagram-feed':'other';
-    if(href.includes('wa.me'))uTrack('whatsapp-click',{location:where});
-    else if(href.includes('instagram.com'))uTrack('social-click',{network:'instagram',location:where});
-    else if(href.includes('youtube.com'))uTrack('social-click',{network:'youtube',location:where});
-    else if(href.includes('spotify.com'))uTrack('social-click',{network:'spotify',location:where});
+    const t=e.target;
+    const where=el=>el.closest('header nav .menu-social')?'menu':el.closest('header nav')?'nav':el.closest('header')?'header':el.closest('footer')?'footer':
+      el.closest('.hero')?'hero':el.closest('#workshops')?'workshop':el.closest('#formMsg')?'form-error':
+      el.closest('#contact')?'contact':el.closest('.ig-feed')?'instagram-feed':el.closest('.page.active')?('page:'+el.closest('.page.active').id):'other';
+    /* wonder-train game controls */
+    const ch=t.closest('.char-card');if(ch){uTrack('game-character',{character:ch.dataset.name||ch.dataset.char});return;}
+    const lv=t.closest('.level-card');if(lv){uTrack('game-level-select',{level:lv.dataset.level});return;}
+    const btn=t.closest('button[id]');
+    if(btn){const map={backBtn:'game-back-to-start',againBtn:'game-play-again',otherBtn:'game-other-journey',storyDrawBtn:'story-draw-again',burger:'menu-toggle',rvNext:'reviews-next',rvPrev:'reviews-prev',modalRoutine:null};
+      if(map[btn.id]){uTrack(map[btn.id]);return;}}
+    if(t.closest('.rv-dot')){uTrack('reviews-dot');return;}
+    const sc=t.closest('.story-cat-btn');if(sc){uTrack('story-category',{category:sc.querySelector('span').textContent});return;}
+    /* game / toolbox cards in the games corner */
+    const card=t.closest('.dl-card');
+    if(card){const title=(card.querySelector('h4')||{}).textContent||card.getAttribute('aria-label')||'card';
+      if(card.id)uTrack('game-open',{game:title.split(' — ')[0].trim()});
+      else uTrack('toolbox-click',{item:title.trim(),state:card.classList.contains('unlocked')?'unlocked':card.classList.contains('gift')?'locked':'coming-soon'});
+      return;}
+    const a=t.closest('a');if(!a)return;
+    const href=a.getAttribute('href')||'',oc=a.getAttribute('onclick')||'';
+    const nav=oc.match(/go\('([a-z]+)'\)/);
+    if(nav){uTrack('nav-click',{to:nav[1],location:where(a),text:a.textContent.trim().slice(0,40)});return;}
+    if(a.classList.contains('game-sheet-dl')){const g=a.closest('.game-sheets-grid'),c=a.closest('.game-sheet-card');
+      uTrack('sheet-download',{game:g?GAME_GRIDS[g.id]||g.id:'unknown',sheet:c&&c.querySelector('span')?c.querySelector('span').textContent.trim():'sheet',file:a.getAttribute('download')||''});return;}
+    if(href.includes('wa.me'))uTrack('whatsapp-click',{location:where(a)});
+    else if(href.includes('instagram.com')){const it=a.closest('.ig-item');uTrack('social-click',{network:'instagram',location:where(a),post:it?String([...it.parentNode.children].indexOf(it)+1):''});}
+    else if(href.includes('youtube.com'))uTrack('social-click',{network:'youtube',location:where(a)});
+    else if(href.includes('spotify.com'))uTrack('social-click',{network:'spotify',location:where(a)});
     else if(href.includes('maps.app.goo.gl'))uTrack('google-reviews-click');
-    else if(a.classList.contains('game-sheet-dl')){const c=a.closest('div');uTrack('download',{file:(c&&c.querySelector('span')?c.querySelector('span').textContent:'sheet').trim()});}
-    else if(a.classList.contains('dl-card'))uTrack('game-card-open',{game:a.id||'card'});
   },true);
   /* ---- burger ---- */
   const burger=document.getElementById('burger');
@@ -2570,7 +2590,7 @@ const QUARTETS_SHEETS = [
     else if(hasLvl){hint.textContent='עכשיו בחרו דמות';}
   }
   function startLevel(lvl){
-    if(window.uTrack)uTrack('game-start',{level:String(lvl)});
+    if(window.uTrack)uTrack('game-start',{level:String(lvl),character:gState.char});
     gState.level=lvl;
     gState.deck=shuffle(QUESTIONS[lvl]);
     gState.qi=0;gState.pos=0;gState.sparks=0;gState.completed=new Set();gState.busy=false;
@@ -2690,6 +2710,7 @@ const QUARTETS_SHEETS = [
     const ab=document.getElementById('answerBtn');
     if(gState.busy||ab.disabled)return;
     ab.disabled=true;
+    if(window.uTrack)uTrack('game-answer',{level:String(gState.level),station:STATIONS[gState.pos].n,step:gState.pos+1});
     if(!gState.completed.has(gState.pos)){
       gState.completed.add(gState.pos);
       gState.sparks++;
@@ -2720,6 +2741,7 @@ const QUARTETS_SHEETS = [
   function clearPicks(){document.querySelectorAll('.station.pick').forEach(el=>{el.classList.remove('pick');el.onclick=null;});}
   function moveTo(t){
     if(gState.busy)return;gState.busy=true;
+    if(window.uTrack)uTrack('game-move',{level:String(gState.level),to:STATIONS[t].n,type:(t-gState.pos>1)?'leap':'next'});
     clearPicks();
     document.getElementById('choiceZone').style.display='none';
     gState.pos=t;
@@ -2735,7 +2757,7 @@ const QUARTETS_SHEETS = [
     const lit=gState.sparks>=SPARK_TARGET;
     ws.querySelector('h3').textContent=lit?'כל הכבוד! הדלקתם את הפנס והגעתם לארמון!':'כל הכבוד! הגעתם לארמון הסיום!';
     ws.querySelector('p').textContent='אספתם '+gState.sparks+' ניצוצות במסע.'+(lit?' הפנס מאיר באור מלא!':' אפשר לשחק שוב ולאסוף עוד ניצוצות.');
-    if(window.uTrack)uTrack('game-finish',{sparks:gState.sparks});
+    if(window.uTrack)uTrack('game-finish',{level:String(gState.level),character:gState.char,sparks:gState.sparks,lantern_lit:lit?'yes':'no'});
     fireConfetti();
     ws.scrollIntoView({behavior:'smooth',block:'center'});
   }
@@ -2753,7 +2775,7 @@ const QUARTETS_SHEETS = [
       setTimeout(()=>c.remove(),4400);
     }
   }
-  function toggleHint(){document.getElementById('qHint').classList.toggle('show')}
+  function toggleHint(){const h=document.getElementById('qHint');h.classList.toggle('show');if(window.uTrack&&h.classList.contains('show'))uTrack('game-hint',{level:String(gState.level),station:STATIONS[gState.pos].n});}
   function resetGame(){
     document.getElementById('gameBoard').style.display='none';
     document.getElementById('gameSetup').style.display='block';
