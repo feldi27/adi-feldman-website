@@ -281,6 +281,7 @@
   }
 
   function startLevel(lvl){
+    if(window.uTrack)uTrack('game-start',{level:String(lvl)});
     gState.level=lvl;
     gState.deck=shuffle(QUESTIONS[lvl]);
     gState.qi=0;gState.pos=0;gState.sparks=0;gState.completed=new Set();gState.busy=false;
@@ -449,6 +450,7 @@
     const lit=gState.sparks>=SPARK_TARGET;
     ws.querySelector('h3').textContent=lit?'כל הכבוד! הדלקתם את הפנס והגעתם לארמון!':'כל הכבוד! הגעתם לארמון הסיום!';
     ws.querySelector('p').textContent='אספתם '+gState.sparks+' ניצוצות במסע.'+(lit?' הפנס מאיר באור מלא!':' אפשר לשחק שוב ולאסוף עוד ניצוצות.');
+    if(window.uTrack)uTrack('game-finish',{sparks:gState.sparks});
     fireConfetti();
     ws.scrollIntoView({behavior:'smooth',block:'center'});
   }

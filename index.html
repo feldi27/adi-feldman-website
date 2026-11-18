@@ -48,6 +48,12 @@
  }
 }
 </script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="9c37ecf1-b785-4cd0-a545-2fff37802244"></script>
+<script>
+/* analytics helpers (Umami) — safe no-ops if the script is blocked */
+window.uTrack=function(name,data){try{if(window.umami)window.umami.track(name,data);}catch(e){}};
+window.uPage=function(id){try{if(window.umami)window.umami.track(function(p){return Object.assign({},p,{url:id==='home'?'/':'/'+id,title:document.title+' | '+id});});}catch(e){}};
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800&family=Assistant:wght@300;400;500;600;700&family=Frank+Ruhl+Libre:wght@400;500;700&display=swap" rel="stylesheet">
@@ -1814,6 +1820,7 @@
   function openModal(i){
     modalTrigger=document.activeElement;
     curModalIdx=i;const m=moments[i];
+    uTrack('moment-open',{moment:m.label});
     document.getElementById('modalEmoji').innerHTML=momentIcon(m.icon);
     document.getElementById('modalTitle').textContent=m.label;
     renderModalTasks();
@@ -1855,6 +1862,7 @@
     const arr=hub.tasksToday[m.key]=hub.tasksToday[m.key]||[];
     const willBeDone=!arr[ti];
     arr[ti]=willBeDone;
+    if(willBeDone)uTrack('moment-task-done',{moment:m.label});
     saveHub();
     el.classList.toggle('done',willBeDone);
     el.setAttribute('aria-pressed',willBeDone?'true':'false');
@@ -2222,6 +2230,7 @@ const QUARTETS_SHEETS = [
   /* ================= GAME ================= */
   /* ================= ROUTING ================= */
   function go(id){
+    uPage(id);
     document.getElementById('nav').classList.remove('open');
     document.getElementById('burger').classList.remove('x');
     document.getElementById('burger').setAttribute('aria-expanded','false');
@@ -2243,6 +2252,21 @@ const QUARTETS_SHEETS = [
     });
     window.scrollTo({top:0,behavior:'smooth'});
   }
+  /* ---- analytics: click tracking (Umami) ---- */
+  document.addEventListener('click',function(e){
+    const a=e.target.closest('a,[role="button"].dl-card');if(!a)return;
+    const href=a.getAttribute('href')||'';
+    const where=a.closest('header nav .menu-social')?'menu':a.closest('header')?'header':a.closest('footer')?'footer':
+      a.closest('.hero')?'hero':a.closest('#workshops')?'workshop':a.closest('#formMsg')?'form-error':
+      a.closest('#contact')?'contact':a.closest('.ig-feed,[class*="ig-"]')?'instagram-feed':'other';
+    if(href.includes('wa.me'))uTrack('whatsapp-click',{location:where});
+    else if(href.includes('instagram.com'))uTrack('social-click',{network:'instagram',location:where});
+    else if(href.includes('youtube.com'))uTrack('social-click',{network:'youtube',location:where});
+    else if(href.includes('spotify.com'))uTrack('social-click',{network:'spotify',location:where});
+    else if(href.includes('maps.app.goo.gl'))uTrack('google-reviews-click');
+    else if(a.classList.contains('game-sheet-dl')){const c=a.closest('div');uTrack('download',{file:(c&&c.querySelector('span')?c.querySelector('span').textContent:'sheet').trim()});}
+    else if(a.classList.contains('dl-card'))uTrack('game-card-open',{game:a.id||'card'});
+  },true);
   /* ---- burger ---- */
   const burger=document.getElementById('burger');
   burger.setAttribute('aria-expanded','false');
@@ -2261,11 +2285,13 @@ const QUARTETS_SHEETS = [
     fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
       body:new URLSearchParams(new FormData(form)).toString()})
     .then(r=>{if(!r.ok)throw new Error(r.status);
+      uTrack('contact-form-submit');
       form.reset();
       msg.className='form-msg ok';msg.textContent='תודה! ההודעה נשלחה, אחזור אליך בהקדם 💛';
       if(typeof showToast==='function')showToast('✓ ההודעה נשלחה בהצלחה');
     })
     .catch(()=>{
+      uTrack('contact-form-error');
       msg.className='form-msg err';
       msg.innerHTML='אופס, ההודעה לא נשלחה. אפשר לנסות שוב או <a href="https://wa.me/972528220038" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline">לכתוב לי בוואטסאפ</a>';
     })
@@ -2544,6 +2570,7 @@ const QUARTETS_SHEETS = [
     else if(hasLvl){hint.textContent='עכשיו בחרו דמות';}
   }
   function startLevel(lvl){
+    if(window.uTrack)uTrack('game-start',{level:String(lvl)});
     gState.level=lvl;
     gState.deck=shuffle(QUESTIONS[lvl]);
     gState.qi=0;gState.pos=0;gState.sparks=0;gState.completed=new Set();gState.busy=false;
@@ -2708,6 +2735,7 @@ const QUARTETS_SHEETS = [
     const lit=gState.sparks>=SPARK_TARGET;
     ws.querySelector('h3').textContent=lit?'כל הכבוד! הדלקתם את הפנס והגעתם לארמון!':'כל הכבוד! הגעתם לארמון הסיום!';
     ws.querySelector('p').textContent='אספתם '+gState.sparks+' ניצוצות במסע.'+(lit?' הפנס מאיר באור מלא!':' אפשר לשחק שוב ולאסוף עוד ניצוצות.');
+    if(window.uTrack)uTrack('game-finish',{sparks:gState.sparks});
     fireConfetti();
     ws.scrollIntoView({behavior:'smooth',block:'center'});
   }
